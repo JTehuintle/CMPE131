@@ -25,3 +25,17 @@ div.loginName h3{
     margin: 0%;
     color: white;
 }
+div.loginBody form{
+    margin: 0 auto;
+    text-align: center;
+}
+
+div.loginBody div{
+    color: aliceblue;
+
+}
+
+div.loginBody div button{
+    max-width: auto;
+    max-height: auto;
+}
