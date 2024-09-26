@@ -2,7 +2,7 @@ body{
     background: url('../images/istockphoto-1405246054-612x612.jpg') no-repeat center;
     background-size: cover;
     min-height: 100vh;
-    margin: 0;
+    margin: 0px;
 }
 div.loginName {
     margin: 50px;
@@ -15,18 +15,18 @@ div.loginName h1{
     font-size:60px;
     font-weight: bold;
     padding: 0px;
-    margin: auto;
+    margin: 0px;
     color: aliceblue;
 }
 div.loginName h3{
     font-size: 30px;
     font-weight: lighter;
     padding: auto;
-    margin: 0%;
+    margin: 0px;
     color: white;
 }
 div.loginBody form{
-    margin: 0 auto;
+    margin: 0px;
     text-align: center;
 }
 
@@ -35,7 +35,16 @@ div.loginBody div{
 
 }
 
-div.loginBody div button{
-    max-width: auto;
-    max-height: auto;
+
+
+div.inputs {
+    margin-top: 15px;
+}
+
+div.inputs label{
+    display: block;
+    text-transform: uppercase;
+    font-size: 15px;
+    font-weight: bold;
+    text-align:calc(center);
 }
