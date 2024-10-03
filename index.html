@@ -1,43 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snoop 131 - Inventory Sort</title>
 
-    <!--Link the html to css-->
-    <link rel = "stylesheet" type ="text/css" href="css/login.css">
+    <!-- Link to the CSS stylesheet -->
+    <link rel="stylesheet" type="text/css" href="login.css">
 </head>
 
-<body class="container">
-    <!--the top of the website-->
-    <div>
-        <div class = "loginName">
-            <h1>Snoop 131</h1>
-            <h3>Inventory Management "Inventi"</h3>
+<body> 
+    <div class="main">
+        <!-- Header of the website -->
+        <h1>Snoop 131</h1>
+        <h3>Inventory Management "Inventi"</h3>
+        
+        <!-- Login form -->
+        <form action="" method="POST"> <!-- Set method for form submission -->
+            <div class="input">
+                <label for="first">Username:</label>
+                <input type="text" id="first" name="first" placeholder="Enter Username" required>
+            </div>
 
-        </div>
+            <div class="input">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Enter Password" required>
+            </div>
 
-        <!-- login body -->
-        <div class = "loginBody">
-            <form action = "">
-                <div class = "inputs">
-                    <label for = "">Username</label>
-                    <input type="text" />
-                </div>
-                <div class = "inputs">
-                    <label for="">Password</label>
-                    <input type="password" />
-                </div>
-                <div>
-                    <button>login</button>
-                </div>
-            </form>
-        </div>
+            <div class="wrap">
+                <button type="submit" onclick="solve()">Login</button>
+            </div>
+        </form>
     </div>
-    <!--<h1>Snoop 131 Inventory Sort</h1>
-    
-    <a href="information.html" target=_blank title="Purpose">
-        <h4>Why</h4>
-    </a>
-    -->
 </body>
 </html>

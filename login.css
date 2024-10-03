@@ -1,50 +1,67 @@
-body{
-    background: url('../images/istockphoto-1405246054-612x612.jpg') no-repeat center;
+/* Body Styles */
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; /* Centering items vertically */
+    text-align: center;
+    background: url('images/istockphoto-1405246054-612x612.jpg') no-repeat center center;
     background-size: cover;
     min-height: 100vh;
-    margin: 0px;
+    margin: 0;
 }
-div.loginName {
-    margin: 50px;
+
+/* Main Container */
+div.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    margin: auto;
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 50px 20px; /* Added padding for top/bottom and side */
+    width: 400px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Optional: adds shadow */
 }
-div.loginName {
-    text-align: center;
-    
-}
-div.loginName h1{
-    font-size:60px;
+
+/* Label Styles */
+div.label {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 10px 0 5px;
+    text-align: left;
+    color: #555;
     font-weight: bold;
-    padding: 0px;
-    margin: 0px;
-    color: aliceblue;
 }
-div.loginName h3{
+
+/* Input Field Styles */
+div.input {
+    display: block;
+    width: 100%; /* Changed to full width */
+    margin-bottom: 15px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 2px solid #ddd;
+    border-radius: 2px;
+}
+
+/* Optional: Customize the look of input fields */
+div.input:focus {
+    border-color: #007BFF; /* Change border color on focus */
+    outline: none; /* Remove outline */
+}
+
+/* Optional: Style for headings */
+h1 {
+    font-size: 60px;
+    font-weight: bold;
+    color: rgb(0, 0, 0); /* Change color as needed */
+}
+
+h3 {
     font-size: 30px;
     font-weight: lighter;
-    padding: auto;
-    margin: 0px;
-    color: white;
-}
-div.loginBody form{
-    margin: 0px;
-    text-align: center;
-}
-
-div.loginBody div{
-    color: aliceblue;
-
-}
-
-
-
-div.inputs {
-    margin-top: 15px;
-}
-
-div.inputs label{
-    display: block;
-    text-transform: uppercase;
-    font-size: 15px;
-    font-weight: bold;
-    text-align:calc(center);
+    color: rgb(0, 0, 0); /* Change color as needed */
 }
