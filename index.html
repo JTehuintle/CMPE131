@@ -19,7 +19,8 @@
         
         
         <!-- Login form -->
-        <form action="" method="POST"> <!-- Set method for form submission -->
+         <!--link is used to send data from Username and Password to website, that is backend-->
+        <form action="/login" method="POST"> <!-- Set method for form submission -->
             <div class="input">
                 <label for="first">Username:</label>
                 <input type="text" id="first" name="first" placeholder="Enter Username" required>
@@ -31,7 +32,7 @@
             </div>
 
             <div class="wrap">
-                <button type="submit" onclick="solve()">Login</button>
+                <button type="submit">Login</button>
             </div>
         </form>
     </div>
