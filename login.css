@@ -90,16 +90,19 @@ div.wrap button{
 
 }
 
-/* HotBar Styles */
+
+
+
+/* hotBar Styles */
 body#homepageBody {
     margin: 0;
     font-family: Arial, sans-serif;
     background: url('images/istockphoto-1405246054-612x612.jpg') no-repeat center center;
     background-size: cover;
-    color: #333;
+    color: #000;
 }
 
-/* Navigation Bar */
+/* hotBar Bar */
 .hotBar {
     display: flex;
     justify-content: space-between;
@@ -119,18 +122,22 @@ body#homepageBody {
     list-style: none;
     display: flex;
     gap: 20px;
+    
 }
 
 .hotBar-links li {
     display: inline;
+    
 }
 
 .hotBar-links a {
+    
     text-decoration: none;
     color: #fff;
     font-weight: bold;
     padding: 10px 20px;
     border-radius: 5px;
+    
 }
 
 .hotBar-links a:hover {
@@ -144,7 +151,7 @@ body#homepageBody {
     justify-content: center;
     align-items: center;
     text-align: center;
-    color: #fff;
+    color: #000; /*fff*/
 }
 
 .front-content h1 {
@@ -170,9 +177,10 @@ body#homepageBody {
     max-width: 1200px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
-
+/* color or the boxes*/
 .feature {
     text-align: center;
+    
     width: 30%;
     padding: 20px;
     border-radius: 10px;
