@@ -13,14 +13,31 @@ body#loginBody{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center; /* Centering items vertically */
+    /*align-items: center; /* Centering items vertically */
     text-align: center;
     background: url('images/istockphoto-1405246054-612x612.jpg') no-repeat center center;
     background-size: cover;
     min-height: 100vh;
     margin: 0;
 }
+.homePageHotBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000;
+    padding: 15px 20px;
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+.homePageHotBar a{
+    
+    color:#fff
+}
 
+ul.homePage{
+    padding: 15px 30px;
+}
 /* Main Container */
 div.main {
     display: flex;
@@ -87,10 +104,10 @@ div.wrap button{
     font-size: 20px;
     padding: 10px 20px;
 
-
 }
 
 
+/* Homepage css*/
 
 
 /* hotBar Styles */
@@ -113,36 +130,6 @@ body#homepageBody {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-.hotBar .logo h2 {
-    color: #fff;
-    margin: 0;
-}
-
-.hotBar-links {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-    
-}
-
-.hotBar-links li {
-    display: inline;
-    
-}
-
-.hotBar-links a {
-    
-    text-decoration: none;
-    color: #fff;
-    font-weight: bold;
-    padding: 10px 20px;
-    border-radius: 5px;
-    
-}
-
-.hotBar-links a:hover {
-    color: #007BFF;
-}
 
 /* Front Section */
 .front {
@@ -163,6 +150,8 @@ body#homepageBody {
     font-size: 24px;
     margin-bottom: 30px;
 }
+
+
 
 /* Features Section */
 .features {
@@ -195,4 +184,47 @@ body#homepageBody {
 
 .feature p {
     font-size: 18px;
+}
+
+.emailForm{
+    text-align: center;
+    padding: 30px;
+    border-radius: 10px;
+}
+.emailForm h3 {
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+.emailForm p {
+    font-size: 18px;
+    margin-bottom: 25px;
+    /*font-family: "Times New Roman", Times, serif;;*/
+}
+.emailInput:focus {
+    border-color: #007BFF;
+}
+div.footer{
+    background-color: rgba(255, 255, 255, 0.8);
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-align: center;
+
+} 
+div.footer a{
+    color: #000;
+    margin-left: 30px;
+    text-decoration: none;
+}
+div.footer a:hover{
+    font-weight: bold;
+}
+
+
+
+/*Dashboard css*/
+
+body#dashBoard{
+
+    
 }

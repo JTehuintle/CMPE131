@@ -12,10 +12,12 @@
 </head>
 
 <nav class="homePage">
-
-    <ul class="homePage">
+    <nav class="homePageHotBar">
+        <div class="title">
+            <h2>Snoop 131</h2>
+        </div>
         <l1><a href="/homePage.html" center>Home</a></l1>
-    </ul>
+    </nav>
 </nav>
 <body id = "loginBody"> 
 
@@ -46,6 +48,17 @@
             
         </form>
     </div>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();  // Prevent the form from submitting normally
+
+            // Debugging alert to confirm the button click is being processed
+            alert("Login button clicked");
+
+            // Redirect to dashboard.html (make sure the file exists in the right location)
+            window.location.href = "dashboard.html";
+        });
+    </script>
 </body>
 
 </html>
