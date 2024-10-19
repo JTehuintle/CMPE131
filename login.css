@@ -225,6 +225,11 @@ div.footer a:hover{
 /*Dashboard css*/
 
 body#dashBoard{
-
+    display: flex;
+    flex-direction: row;
     
+}
+#dashBoardMainContainer{
+    display: flex;
+    flex-direction: row;
 }
