@@ -10,18 +10,21 @@
     
 
 </head>
-
 <nav class="homePage">
     <nav class="homePageHotBar">
         <div class="title">
             <h2>Snoop 131</h2>
         </div>
-        <l1><a href="/homePage.html" center>Home</a></l1>
+        <l1><a href="/homePage" center>Home</a></l1>
     </nav>
 </nav>
+
+
 <body id = "loginBody"> 
 
     <div class="main">
+        
+
         <!-- Header of the website -->
         <h1>Snoop 131</h1>
         <h3>Inventory Management "Inventi"</h3>
@@ -29,11 +32,10 @@
         
         <!-- Login form -->
          <!--link is used to send data from Username and Password to website, that is backend-->
-         <!-- I added the id so it can actually go to the dashboard -->
-        <form id="loginForm" action="/login" method="POST"> <!-- Set method for form submission -->
+        <form action="/index" method="POST"> <!-- Set method for form submission -->
             <div class="input">
-                <label for="first">Username:</label>
-                <input type="text" id="first" name="first" placeholder="Enter Username" required>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" placeholder="Enter Username" required>
             </div>
 
             <div class="input">
@@ -46,17 +48,20 @@
             </div>
             
         </form>
+
+        <div class="create-account">
+            <p>Dont have an account? <a href="/register"> Create one here!</a></p>
+        </div>
     </div>
     <script>
         document.getElementById('loginForm').addEventListener('submit', function(event) {
-            event.preventDefault();   // Prevent the form from submitting normally
+            event.preventDefault();  // Prevent the form from submitting normally
 
             // Debugging alert to confirm the button click is being processed
             alert("Login button clicked");
 
-            
             // Redirect to dashboard.html (make sure the file exists in the right location)
-            window.location.href = "dashBoard.html";
+            window.location.href = "dashboard.html";
         });
     </script>
 </body>
