@@ -1,46 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>Snoop 131 - Dashboard</title>
-     <!-- Link to the CSS stylesheet -->
+    <!-- Link to the CSS stylesheet -->
     <link rel="stylesheet" type="text/css" href="login.css">
-    <script src="https://kit.fontawesome.com/2bb5d6196b.js" ></script>
+    <script src="https://kit.fontawesome.com/2bb5d6196b.js"></script>
 </head>
 
 <body>
-    <div id = "dashBoard">
-        <div class = "dashBoardSideBar" id ="dashBoardSideBar">    
-            <h3 class = "dashBoardLogo"> Inventi </h3>
-            <div class = "dashBoardUser">
-                <img src = "/images/Screenshot 2024-10-18 at 8.14.15 AM.png" alt="User image."/>
+    <div id="dashBoard">
+        <div class="dashBoardSideBar" id="dashBoardSideBar">
+            <h3 class="dashBoardLogo"> Inventi </h3>
+            <div class="dashBoardUser">
+                <img src="/images/Screenshot 2024-10-18 at 8.14.15 AM.png" alt="User image." />
                 <span>Snoop</span>
- 
+
             </div>
-            <div class = "dashBoardMenu">
-                <ul class = "dashBoardMenuList">
-                    <li class = "menuInUse">
-                        <a href= ""><i class="  fa-solid fa-house"></i>  Dashboard</a>
+            <div class="dashBoardMenu">
+                <ul class="dashBoardMenuList">
+                    <li class="menuInUse">
+                        <a href=""><i class="  fa-solid fa-house"></i> Dashboard</a>
                     </li>
                     <li>
-                        <a href = ""><i class="fa-solid fa-boxes-packing"></i> Incoming Inventory</a>
+                        <a href=""><i class="fa-solid fa-boxes-packing"></i> Incoming Inventory</a>
                     </li>
                     <li>
-                        <a href = ""><i class="fa-solid fa-chart-simple"></i> Reports</a>
+                        <a href=""><i class="fa-solid fa-chart-simple"></i> Reports</a>
                     </li>
                     <li>
-                        <a href = ""><i class="fa-solid fa-file-circle-plus"></i> Documents</a>
+                        <a href=""><i class="fa-solid fa-file-circle-plus"></i> Documents</a>
                     </li>
-                    
+
                 </ul>
             </div>
         </div>
-        <div class = "dashBoardInfo" id = "dashBoardInfo"> 
-            <div class= "dashBoardInfoHeader">
-                <a href=""  id="toggleButton"><i class="fa-solid fa-bars"></i></a>
-                <a href= "" id="logoutButton"><i class="fa-solid fa-right-from-bracket"></i>Log-Out</a>
+        <div class="dashBoardInfo" id="dashBoardInfo">
+            <div class="dashBoardInfoHeader">
+                <a href="" id="toggleButton"><i class="fa-solid fa-bars"></i></a>
+                <a href="index.html" id="logoutButton"><i class="fa-solid fa-right-from-bracket"></i>Log-Out</a>
             </div>
-            <div class = "dashBoardInfoMain">
-                <div class = "dashBoardInfoSub">
+            <div class="dashBoardInfoMain">
+                <div class="dashBoardInfoSub">
 
                 </div>
             </div>
@@ -50,23 +51,22 @@
 
         var sideBarIsOpen = true;
 
-        toggleButton.addEventListener( 'click', () => {
+        toggleButton.addEventListener('click', () => {
 
-            if(sideBarIsOpen){
-                    event.preventDefault();
-                    
-                
+            if (sideBarIsOpen) {
+                event.preventDefault();
                 dashBoardSideBar.style.width = '20%';
                 dashBoardInfo.style.width = '90%';
                 sideBarIsOpen = false;
-            }else{
-                    event.preventDefault();
+            } else {
+                event.preventDefault();
                 dashBoardSideBar.style.width = '30%';
                 dashBoardInfo.style.width = '70%';
                 sideBarIsOpen = true;
             }
         });
-        
-    </script>    
+
+    </script>
 </body>
+
 </html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,7 @@
 
     <!-- Link to the CSS stylesheet -->
     <link rel="stylesheet" type="text/css" href="login.css">
-    <script src="https://kit.fontawesome.com/2bb5d6196b.js" ></script>
+    <script src="https://kit.fontawesome.com/2bb5d6196b.js"></script>
 </head>
 
 <body id="homepageBody">
@@ -17,7 +18,7 @@
             <h2>Snoop 131</h2>
         </div>
         <ul class="link">
-            <l1><a href="/index.html" class = "hotBar">Login</a></l1>
+            <l1><a href="/index.html" class="hotBar">Login</a></l1>
         </ul>
     </nav>
 
@@ -27,26 +28,24 @@
             <h1>Welcome to Snoop 131</h1>
             <p>Your reliable inventory management system</p>
         </div>
-        <div class = "banners"> 
-            <a href=""><i class = "fa-solid fa-house"></i></a>
-        </div>
+
     </header>
 
     <!-- Content Section -->
     <section class="features">
         <div class="feature">
             <h3>Manage Inventory</h3>
-            <p>Keep track of your stock with ease, update quantities, and 
+            <p>Keep track of your stock with ease, update quantities, and
                 monitor product availability in real-time.</p>
         </div>
         <div class="feature">
             <h3>Generate Reports</h3>
             <p>Generate detailed inventory reports and view trends that help
-                 you make informed business decisions.</p>
+                you make informed business decisions.</p>
         </div>
         <div class="feature">
             <h3>Secure Access</h3>
-            <p>Your data is safe with our secure login system. Only authorized 
+            <p>Your data is safe with our secure login system. Only authorized
                 personnel can access inventory details.</p>
         </div>
     </section>
@@ -54,25 +53,74 @@
         <div>
             <div class="features">
                 <div class="emailForm">
-                <h3>Get Notified For Updates!</h3>
-                <p> Want to be notified when we update our inventory management system
-                to make your job easier? Sign up so you can be notified right away 
-                when the changes we make are availabile! We strive to make your management care 
-                freem, so you can focus on other tasks.  </p>
-                <form action="">
-                    <input type = "text" placeholder="Email Adress ">
-                    <button>Notify  </button>
-                </form>    
-            </div>
+                    <h3>Get Notified For Updates!</h3>
+                    <p> Want to be notified when we update our inventory management system
+                        to make your job easier? Sign up so you can be notified right away
+                        when the changes we make are availabile! We strive to make your management care
+                        freem, so you can focus on other tasks. </p>
+                    <form action="">
+                        <input type="text" placeholder="Email Adress ">
+                        <button>Notify </button>
+                    </form>
+                </div>
     </section>
     <div class="footer">
         <div class="homepageBody">
 
-            <a href=""> Contact </a> 
-            <a href=""> Support </a>
-            <a href=""> Privacy Policy </a>
-            <a href=""> Gmail </a>
+            <a href="" class="footer-link"> Contact </a>
+            <a href="" class="footer-link"> Support </a>
+            <a href="" class="footer-link"> Privacy Policy </a>
+            <a href="" class="footer-link"> Gmail </a>
         </div>
     </div>
+    <script>
+
+
+
+        function showContact(event) {
+            event.preventDefault();
+            alert("Contact us gmail: cmpe131Snoop@gmail.com")
+        }
+
+        const footerLinks = document.querySelectorAll(".footer-link");
+
+        footerLinks.forEach(link => {
+            link.addEventListener("click", showContact);
+        })
+
+
+
+//whole lotta trial and error 
+        /*
+    
+                var Contact = true;
+        
+                clickedContact.addEventListeners('click', () => {
+                    if (clickedContact) {
+                        alert("Contact us gmail: cmpe131Snoop@gmail.");
+                    } else
+                        return;
+        
+                });
+        
+        */
+        /*
+                function popUpFunction() {
+                    if ("click") {
+                        alert("clickedContacts")
+                    } else {
+        
+                    }
+                }
+        
+        
+        */
+        /*
+                function myFunction(footer) {
+                    alert("Contact us gmail: cmpe131Snoop@gmail.com")
+                }
+                document.addEventListener("click", myFunction)
+        */
+    </script>
 
 </html>
