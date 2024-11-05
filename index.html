@@ -1,13 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snoop 131 - Inventory Sort</title>
+    <style>
+        /* Body Styles */
+        body#loginBody {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            /*align-items: center; /* Centering items vertically */
+            text-align: center;
+            background: url('images/istockphoto-1405246054-612x612.jpg') no-repeat center center;
+            background-size: cover;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .homePageHotBar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #000;
+            padding: 15px 20px;
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            font-family: Arial, sans-serif;
+        }
+
+        .homePageHotBar a {
+
+            color: #fff
+        }
+
+        ul.homePage {
+            padding: 15px 30px;
+        }
+
+        /* Main Container */
+        div.main {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            /* Center content vertically */
+            align-items: center;
+            /* Center content horizontally */
+            margin: auto;
+            background-color: #fff;
+            /*background-color: rgba(255, 255, 255, 0.8)  it is the transparent version
+    what ever you choose looks best*/
+            border-radius: 15px;
+            padding: 50px 20px;
+            /* Added padding for top/bottom and side */
+            width: 400px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            /* Optional: adds shadow */
+        }
+
+        /* Label Styles */
+        div.label {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            margin: 10px 0 5px;
+            text-align: left;
+            color: #555;
+            font-weight: bold;
+        }
+
+        /* Input Field Styles */
+        div.input {
+            display: block;
+            width: 100%;
+            /* Changed to full width */
+            margin-bottom: 15px;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 2px solid #ddd;
+            border-radius: 2px;
+        }
+
+        /* Optional: Customize the look of input fields */
+        div.input:focus {
+            border-color: #007BFF;
+            /* Change border color on focus */
+            outline: none;
+            /* Remove outline */
+        }
+
+        /* Optional: Style for headings */
+        h1 {
+            font-size: 60px;
+            font-weight: bold;
+            color: rgb(0, 0, 0);
+            /* Change color as needed */
+        }
+
+        h3 {
+            font-size: 30px;
+            font-weight: lighter;
+            color: rgb(0, 0, 0);
+            /* Change color as needed */
+        }
+
+        div.wrap {
+            margin-top: 40px;
+            text-align: center;
+            border: #555;
+
+        }
+
+        div.wrap button {
+            font-size: 20px;
+            padding: 10px 20px;
+
+        }
+    </style>
 
     <!-- Link to the CSS stylesheet -->
     <link rel="stylesheet" type="text/css" href="login.css">
-    
+
+
 
 </head>
 <nav class="homePage">
@@ -20,19 +135,22 @@
 </nav>
 
 
-<body id = "loginBody"> 
+<body id="loginBody">
+    <p style="background: url('images/istockphoto-1405246054-612x612.jpg');"></p>
 
     <div class="main">
-        
+
+
 
         <!-- Header of the website -->
         <h1>Snoop 131</h1>
         <h3>Inventory Management "Inventi"</h3>
-        
-        
+
+
         <!-- Login form -->
-         <!--link is used to send data from Username and Password to website, that is backend-->
-        <form action="/index" method="POST"> <!-- Set method for form submission -->
+        <!--link is used to send data from Username and Password to website, that is backend-->
+        <form action="/index" method="POST">
+            <!-- Set method for form submission -->
             <div class="input">
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username" placeholder="Enter Username" required>
@@ -46,7 +164,7 @@
             <div class="wrap">
                 <button type="submit">Login</button>
             </div>
-            
+
         </form>
 
         <div class="create-account">
@@ -54,7 +172,7 @@
         </div>
     </div>
     <script>
-        document.getElementById('loginForm').addEventListener('submit', function(event) {
+        document.getElementById('loginForm').addEventListener('submit', function (event) {
             event.preventDefault();  // Prevent the form from submitting normally
 
             // Debugging alert to confirm the button click is being processed
