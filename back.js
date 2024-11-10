@@ -21,8 +21,8 @@ when it asks for password enter 'root'
 should start server
 */ 
 
-const bcrypt = require('bcryptjs');
-const mysql = require('mysql2'); // imports mysql
+const bcrypt = require('bcryptjs'); // npm install bcrypt
+const mysql = require('mysql2'); // npm install mysql2
 const connection = mysql.createConnection({ //creates connection
     host: 'localhost',
     port: 3306,
@@ -41,6 +41,7 @@ connection.connect((error) =>{
 module.exports = connection;
 
 const express = require('express');
+const session = require('express-session');
 const app = express();
 const port = process.env.PORT || 3000;
 const path = require("path");
@@ -51,24 +52,58 @@ const currentProductsFile = path.resolve(
 const bodyParser = require('body-parser');// Used to send css/images
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static(path.join(__dirname, 'public')));
+//app.use(express.static('public'));
 
+app.use(session({// users token, makes sure only logged in people are allowed to access /dashBoard
+    secret: 'TeamGroup3',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {maxAge: 10*60*1000} 
+}));
 
 app.get('/homePage', (req, res)=>{ // Homepage of the website
-    res.sendfile(path.join(__dirname + '/homePage.html'));
-
+    res.sendFile(path.join(__dirname + '/homePage.html'));
 });
-
 app.get('/index', (req, res)=>{ // login page of the website
     res.sendFile(path.join(__dirname + '/index.html'));
 });
-app.get('/dashBoard', (req, res)=>{ // dashboard page for the user
+//to make sure dashboard is secure
+app.get('/dashBoard', isAuthenticated_and_Role('employee'), (req, res)=>{ // dashboard page for the user
     res.sendFile(path.join(__dirname + '/dashBoard.html'));
 });
 app.get('/register', (req, res)=>{
     res.sendFile(path.join (__dirname, 'register.html'));
 });
+app.get('/Admin_Dashboard', isAuthenticated_and_Role('admin'), (req, res)=>{
+    res.sendFile(path.join(__dirname + '/DashBoard_Admin_View.html'));
+
+});
+//user logout
+app.get('/logout', (req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            console.error("Error logging out:", err);
+            return res.status(500).send("Error logging out.");
+        }
+        res.redirect('/index'); // Redirect to login page after logout
+    });
+});
 
 
+
+function isAuthenticated_and_Role(role){
+    return function(req, res, next){
+        console.log("session data: ", req.session);
+        if(req.session && req.session.user && req.session.user.role === role){
+            return next();
+        }
+        else{
+            return res.redirect('/index'); // redirects to login page if not logged in/ authorized
+        }
+    }
+}
+// calls mysql to check if user has accounnt, then login
+// login function
 app.post('/index', async(req, res)=>{
     const {username, password} = req.body;
     //call sql database
@@ -86,10 +121,20 @@ app.post('/index', async(req, res)=>{
         const user = results[0];
         // used to compare user input password and encrypted password from sql
         const isMatch = await bcrypt.compare(password, user.password);
+        console.log("User ${username} attempting to log in. password match: ${isMatch}");
         if(isMatch){
-            res.redirect('/dashBoard');
+            req.session.user = user;
+            if(user.role === 'admin'){ // directs to admin dashboard
+                console.log("User ${username} logged in successfully");
+                return res.redirect('/Admin_Dashboard');
+            }
+            else{ // directs to employee dashboard
+                console.log("User ${username} logged in successfully");
+                return res.redirect('/dashBoard');
+            }
         }
         else{
+            console.log("invalid password attemtp for user ${username}");
             res.redirect('/index');
             //res.status(401).send("Password Invalid");
         }
@@ -104,19 +149,17 @@ app.post('/index', async(req, res)=>{
        }*/
     });
 });
-
-
 //user registration 
 app.post('/register', async(req, res)=>{
-    const {username, password} = req.body;
+    const {username, password, role} = req.body;
     //const hashedPassword = await bcrypt.has(password, 10);
     try{
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
         //storing into sql
         //console.log(username, " ",password); 
-        const sql = "insert into users (username, password) values (?, ?)";
-        connection.query(sql, [username, hashedPassword], (err, result)=>{
+        const sql = "insert into users (username, password, role) values (?, ?, ?)";
+        connection.query(sql, [username, hashedPassword, role], (err, result)=>{
             if(err){
                 console.error("Error inserting user into database:", err);
                 return res.status(500).send("error creating username");
@@ -141,12 +184,61 @@ app.post('/register', async(req, res)=>{
         res.redirect('/index');
     });*/
 });
+//user wants to add new items that arent in the database (ONLY ADMINS)
+app.post('/add_Product', (req, res) => {
+    const {itemID, name, sku, quantity, location} = req.body;
+
+    if(!itemID || !name || !sku || !quantity || !location){
+        return res.status(400).send("All fields are required. ");
+    }
+    const query = 'INSERT INTO products (itemID, name, sku, quantity, location) VALUES (?, ?, ?, ?, ?)';
+    connection.query(query, [itemID, name, sku, quantity, location], (err, result)=>{
+        if(err){
+            console.error("Error inserting product: ", err.message);
+            return res.status(500).send("Error adding product to the database. :c");
+        }
+        res.redirect('/Admin_Dashboard');
+    });
+    
+});
+//user wants to adjust quantity 
+app.post('/adjust_quantity', (req, res) => {
+    const { itemID, quantity } = req.body;
+    const userRole = req.session.user.role;
+
+    if(userRole === 'admin' || userRole === "employee"){ // checks if userrol is correct
+        const query = 'UPDATE products SET quantity = quantity + ? WHERE itemID = ?';
+
+        connection.query(query, [quantity, itemID], (err, result) => {
+            if (err) {
+                console.error('Error updating quantity:', err);
+                res.send('Error updating quantity');
+            } else {
+                console.log(`Quantity updated successfully for itemID: ${itemID}`); 
+                // redirection based on user role
+                if(userRole === 'admin'){
+                    res.redirect('/Admin_Dashboard');
+                }
+                else if(userRole === 'employee'){
+                    res.redirect('/dashBoard');
+                }
+            }
+        });
+    } else {
+        res.send("User Role not found.");
+    }
+});
+
+
+//ALERTS
+
+
 
 
 //posts in console that website is located at cite. 
 app.listen(port,()=>{
 
-    console.log("The Server is running on http://localhost:3000/");
+    console.log("The Server is running on http://localhost:3000/homePage");
 
 });
 
