@@ -82,22 +82,24 @@
         }
 
         /*dashboard right side*/
-        /*div.dashBoardInfoHeader {
+        div.dashBoardInfoHeader {
             background: #232323;
             padding: 20px;
-        }*/
-
-        div.dashBoardInfoHeader {
-        width: 100%;
-        position: relative;
-        background: #232323;
-        padding: 20px;
-        z-index: 1; /* Ensures it stays on top of other elements */
+            display: flex;
+            justify-content: space-between;
+            align-items: right;
         }
 
-
+        div.dashBoardInfoHeader a {
+            color: #fff;
+            font-size: 18px;
+            text-decoration: none;
+        }
 
         a#logoutButton {
+            color: #fff;
+            font-size: 18px;
+            text-decoration: none;
             float: right;
         }
 
@@ -181,6 +183,66 @@
         .quantity-adjust-form button:hover {
             background-color: #4cae4c;
         }
+
+        .search_inventory input[type = text]{
+            float: right;
+            padding: 6px;
+            border: none;
+            margin-top: 8px;
+            margin-right: 16px;
+            font-size: 17px
+        }
+
+        .searchInventory {
+            text-align: center;
+            margin-top: 10px;
+            padding: 10px;
+        }
+        .searchInventory input[type="text"] {
+            width: 95%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f9f9f9; /* Light background */
+        }
+        .current_stock {
+            margin: 0 auto;
+            width: 95%;
+            padding: 5px;
+            border: 5px solid #ccc; /* Light grey border */
+            border-radius: 5px; /* Rounded corners */
+            background-color: #f9f9f9; /* Light background */
+            margin: 20px auto; /* Spacing around the box */
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow */
+        }
+        .product_container{
+            margin: 0 auto;
+            width: 95%;
+            display:flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .add_new_product{
+            margin: left;
+            width: 95%;
+            padding: 5px;
+            border: 5px solid #ccc; /* Light grey border */
+            border-radius: 5px; /* Rounded corners */
+            background-color: #f9f9f9; /* Light background */
+            margin: 20px auto; /* Spacing around the box */
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow */
+        }
+        .order_more_product{
+            margin: 0 auto;
+            width: 95%;
+            padding: 5px;
+            border: 5px solid #ccc; /* Light grey border */
+            border-radius: 5px; /* Rounded corners */
+            background-color: #f9f9f9; /* Light background */
+            margin: 20px auto; /* Spacing around the box */
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow */
+        }
     </style>
 </head>
 
@@ -207,19 +269,23 @@
                         <a href="/documents"><i class="fa-solid fa-file-circle-plus"></i> Documents</a>
                     </li>
                 </ul>
+                
             </div>
         </div>
-
-        <div class="current_stock" id="current_stock">
+    
+        <div class="dashBoardInfo" id="dashBoardInfo">
             <div class="dashBoardInfoHeader">
                 <a href="" id="toggleButton"><i class="fa-solid fa-bars"></i></a>
                 <a href="index" id="logoutButton"><i class="fa-solid fa-right-from-bracket"></i>Log-Out</a>
             </div>
+            <!--Search Bar-->
+            <div class="searchInventory">
+                <input type="text" placeholder="Search in your Inventory">
+            </div>
+             <!-- Current Stock Table -->
             <div class="current_stock">
-                <!-- Add Product Form -->
-                <div class="current_Stock">
-                    <h3>Inventory Table</h3>
-                    <table id="inventoryTable" border="2">
+                <h3>Current Inventory</h3>
+                <table id="inventoryTable" border="1">
                         <thead>
                             <tr>
                                 <th>Item ID</th>
@@ -231,28 +297,78 @@
                         </thead>
                     <tbody>
                             <!-- Data will be inserted here dynamically -->
-                    </tbody>   
-                </div>
-
-                <!-- Increment/Decrement Quantity Form 
-                <div class="quantity-adjust-form">
-                    <h3>Adjust Product Quantity</h3>
-                    <form action="/adjust_quantity" method="POST">
-                        <label for="itemID">Enter Product Item ID:</label>
-                        <input type="text" id="itemID" name="itemID" required><br><br>
-
-                        <label for="quantity">Quantity Adjustment (+/-):</label>
-                        <input type="number" id="quantity" name="quantity" required><br><br>
-
-                        <button type="submit">Adjust Quantity</button>
-                    </form>
-                </div> -->
+                    </tbody>  
+                </table>
             </div>
+            <!--holds two boxes for adding product and ordering more-->
+            <div class="product_container">
+                <!--Order More Products-->
+                <div class="add_new_product">
+                    <h3>Add New Product</h3>
+                        <form action="/add_Product" method="POST">
+                        <label for="itemID">Item ID:</label>
+                        <input type="text" id="itemID" name="itemID" required><br><br>
+    
+                        <label for="name">Product Name:</label>
+                        <input type="text" id="name" name="name" required><br><br>
+    
+                        <label for="sku">SKU:</label>
+                        <input type="text" id="sku" name="sku" required><br><br>
+    
+                        <label for="quantity">Quantity:</label>
+                        <input type="number" id="quantity" name="quantity" required><br><br>
+    
+                        <label for="location">Location:</label>
+                        <input type="text" id="location" name="location" required><br><br>
+    
+                        <button type="submit">Add Product</button>
+                    </form>
+                </div>
+                <!--box for ordering more product-->
+                <div class="order_more_product">
+                    <h3>Order More Products</h3>
+                        <form action="/add_Product" method="POST">
+                        <label for="itemID">Item ID:</label>
+                        <input type="text" id="itemID" name="itemID" required><br><br>
+                        
+                        <label for="sku">SKU:</label>
+                        <input type="text" id="sku" name="sku" required><br><br>
+    
+                        <label for="quantity">Quantity:</label>
+                        <input type="number" id="quantity" name="quantity" required><br><br>
+    
+                        <button type="submit">Add Product</button>
+                    </form>
+                </div>
+            </div>
+            
         </div>
     </div>
+</body>
+    <script>
+    fetch('/current_stock')
+        .then(response => response.json())
+        .then(data => {
+            const tableBody = document.getElementById('inventoryTable').querySelector('tbody');
+            tableBody.innerHTML = ''; // Clear any previous data
 
+            data.forEach(item => {
+                const row = document.createElement('tr');
 
-
+                row.innerHTML = `
+                    <td>${item.itemID}</td>
+                    <td>${item.name}</td>
+                    <td>${item.SKU}</td>
+                    <td>${item.quantity}</td>
+                    <td>${item.location}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching inventory data:', error);
+        });
+</script>
     <script>
         var sideBarIsOpen = true;
 
