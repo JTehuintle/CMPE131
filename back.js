@@ -76,7 +76,9 @@ app.get('/register', (req, res)=>{
 });
 app.get('/Admin_Dashboard', isAuthenticated_and_Role('admin'), (req, res)=>{
     res.sendFile(path.join(__dirname + '/DashBoard_Admin_View.html'));
-
+});
+app.get('/Admin_Inventory', isAuthenticated_and_Role('admin'), (req, res)=>{
+    res.sendFile(path.join(__dirname + '/Review_Inventory_Admin_View.html'));
 });
 //user logout
 app.get('/logout', (req, res) => {
@@ -88,9 +90,6 @@ app.get('/logout', (req, res) => {
         res.redirect('/index'); // Redirect to login page after logout
     });
 });
-
-
-
 function isAuthenticated_and_Role(role){
     return function(req, res, next){
         console.log("session data: ", req.session);
@@ -149,6 +148,8 @@ app.post('/index', async(req, res)=>{
        }*/
     });
 });
+
+
 //user registration 
 app.post('/register', async(req, res)=>{
     const {username, password, role} = req.body;
@@ -228,7 +229,19 @@ app.post('/adjust_quantity', (req, res) => {
         res.send("User Role not found.");
     }
 });
-
+// fetch mysql stock data
+app.get('/current_stock', isAuthenticated_and_Role('admin'), (req,res)=>{
+    const query = 'SELECT * FROM products';
+    
+    connection.query(query, (err, results)=>{
+        if(err){
+            console.error('error getting data from sql', err);
+        }
+        else{
+            res.json(result);
+        }
+    });
+});
 
 //ALERTS
 
