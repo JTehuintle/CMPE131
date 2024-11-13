@@ -10,6 +10,7 @@
         #dashBoard {
             display: flex;
             flex-direction: row;
+
         }
 
         div.dashBoardSideBar {
@@ -63,6 +64,7 @@
             font-size: 18px;
             text-transform: uppercase;
             color: #fff;
+
         }
 
         ul.dashBoardMenuList li a {
@@ -99,51 +101,93 @@
 
         /*contents displayed*/
 
-        div.dashBoardInfoMain {
-            padding: 80px 10px 10px;
-        }
+
 
         div.dashBoardInfoMain {
             background: #fff;
             max-height: 900px;
             height: 100%;
             height: 80%;
+
         }
 
-        /* Increment/Decrement form */
-        .quantity-adjust-form {
-            margin-top: 20px;
-            background: #f4f4f4;
-            padding: 20px;
-            border-radius: 5px;
+        /* style for the dashboard info being displayed  */
+
+
+
+
+        .dashBoardInfoMain {
+            background: #fff;
+            padding: 80px 10px 10px;
+            max-height: 900px;
+            height: 100%;
         }
 
-        .quantity-adjust-form label {
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        .quantity-adjust-form input {
+        /* Search Bar */
+        .search_bar input {
             width: 100%;
             padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 4px;
-            border: 1px solid #ccc;
+            font-size: 16px;
         }
 
-        .quantity-adjust-form button {
-            padding: 10px 20px;
-            background-color: #5cb85c;
-            color: white;
+        /* Inventory Sections */
+        .inventory_sections {
+            display: flex;
+            gap: 20px;
+        }
+
+        .current_stock,
+        .adjust_quantity,
+        .top_sellers,
+        .Low_stock {
+            border: 1px solid #ddd;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        .current_stock {
+            flex: 1;
+        }
+
+        .adjust_quantity {
+            width: 250px;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        /* Adjust Quantity Section */
+        .adjust_quantity label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        .adjust_quantity input {
+            width: 100%;
+            padding: 5px;
+            margin: 5px 0;
+        }
+
+        .adjust_quantity button {
+            width: 100%;
+            padding: 10px;
+            background-color: white;
+            color: black;
             border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .quantity-adjust-form button:hover {
-            background-color: #4cae4c;
+            margin-top: 10px;
+            outline-style: black;
         }
     </style>
+
 </head>
 
 <body>
@@ -153,11 +197,12 @@
             <div class="dashBoardUser">
                 <img src="/images/Screenshot 2024-10-18 at 8.14.15 AM.png" alt="User image." />
                 <span>Snoop</span>
+
             </div>
             <div class="dashBoardMenu">
                 <ul class="dashBoardMenuList">
                     <li class="menuInUse">
-                        <a href=""><i class="fa-solid fa-house"></i> Dashboard</a>
+                        <a href=""><i class="  fa-solid fa-house"></i> Dashboard</a>
                     </li>
                     <li>
                         <a href=""><i class="fa-solid fa-boxes-packing"></i> Incoming Inventory</a>
@@ -168,66 +213,135 @@
                     <li>
                         <a href=""><i class="fa-solid fa-file-circle-plus"></i> Documents</a>
                     </li>
+
                 </ul>
             </div>
         </div>
-
         <div class="dashBoardInfo" id="dashBoardInfo">
             <div class="dashBoardInfoHeader">
                 <a href="" id="toggleButton"><i class="fa-solid fa-bars"></i></a>
-                <a href="index" id="logoutButton"><i class="fa-solid fa-right-from-bracket"></i>Log-Out</a>
+                <a href="/index" id="logoutButton"><i class="fa-solid fa-right-from-bracket"></i>Log-Out</a>
             </div>
             <div class="dashBoardInfoMain">
-                <!-- Increment/Decrement Quantity Form -->
-                <div class="quantity-adjust-form">
-                    <h3>Adjust Product Quantity</h3>
-                    <form action="/adjust_quantity" method="POST">
-                        <label for="itemID">Enter Product Item ID:</label>
-                        <input type="text" id="itemID" name="itemID" required><br><br>
+                <div class="dashBoardInfoSub">
 
-                        <label for="quantity">Quantity Adjustment (+/-):</label>
-                        <input type="number" id="quantity" name="quantity" required><br><br>
+                    <div class="dashBoardInfoMain">
+                        <div class="dashBoardInfoSub">
+                            <div class="dashBoardInfoSub">
+                                <!--
+                                <div class="search_bar">
+                                    <input type="text" placeholder="Search in your Inventory">
+                                </div>
+                            -->
+                                <div class="inventory_sections">
+                                    <div class="current_stock">
+                                        <h3>Current Stock</h3>
+                                        <table>
+                                            <tr>
+                                                <th>Item Name</th>
+                                                <th>Quantity</th>
+                                                <th>Location on Site</th>
+                                            </tr>
 
-                        <button type="submit">Adjust Quantity</button>
-                    </form>
+                                            <!--for every input there will be a new 
+                                            tr> This the new row created
+
+                                            <td> nasndinaw</td>
+                                            <td> nasndinaw</td>
+                                            <td> nasndinaw</td>
+                                            These 3 are the new items being added, that being the database giving this information
+
+                                            </tr>, just an fyi
+                                            -->
+
+                                            <tr>
+                                                <td>backend placeholder</td>
+                                                <td>backend placeholder</td>
+                                                <td>backend placeholder</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="adjust_quantity">
+                                        <h3>Adjust Product Quantity</h3>
+                                        <label for="productID">Enter Product Item ID or Name:</label>
+                                        <input type="text" id="productID">
+                                        <label for="quantityAdjustment">Quantity Adjustment (+/-):</label>
+                                        <input type="number" id="quantityAdjustment">
+                                        <button>Adjust</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="Low_stock">
+                            <h3>Low Stock on these items </h3>
+                            <table>
+
+                                <tr>
+                                    <th> Item Name</th>
+                                    <th> Item Quntity</th>
+                                </tr>
+
+                                <tr>
+                                    <td>backend placeholder</td>
+                                    <td>backend placeholder</td>
+                                </tr>
+
+                            </table>
+
+
+                        </div>
+
+                        <div class="top_sellers">
+                            <h3>Top Sellers of the Month</h3>
+                            <table>
+                                <tr>
+                                    <th>Item Name</th>
+                                    <th>Quantity</th>
+                                    <th>Sales this Month</th>
+
+
+                                </tr>
+                                <tr>
+                                    <td> backend placeholder</td>
+                                    <td> backend placeholder</td>
+                                    <td> backend placeholder</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td> backend placeholder</td>
+                                    <td> backend placeholder</td>
+                                    <td> backend placeholder</td>
+
+                                </tr>
+
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
+    </div>
     <script>
+
         var sideBarIsOpen = true;
 
-        toggleButton.addEventListener('click', () => {
+        toggleButton.addEventListener('click', (event) => {
+            event.preventDefault();  // Only for the toggle button
             if (sideBarIsOpen) {
-                event.preventDefault();
                 dashBoardSideBar.style.width = '20%';
                 dashBoardInfo.style.width = '90%';
                 sideBarIsOpen = false;
             } else {
-                event.preventDefault();
                 dashBoardSideBar.style.width = '30%';
                 dashBoardInfo.style.width = '70%';
                 sideBarIsOpen = true;
             }
         });
+
+
     </script>
 </body>
 
 </html>
-
-<script>
-    let inactivityTime = function () {
-        let timer;
-
-        // resets timer when user moves mouse/press key
-        window.onload = resetTimer;
-        document.onmousemove = resetTimer;
-        document.onkeypress = resetTimer;
-
-        function logout() {
-            alert("You've been logged out due to inactivity.");
-            window.location.href = "/logout";
-        }
-    }
-</script>
