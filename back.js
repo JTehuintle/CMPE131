@@ -80,6 +80,10 @@ app.get('/Admin_Dashboard', isAuthenticated_and_Role('admin'), (req, res)=>{
 app.get('/Admin_Inventory', isAuthenticated_and_Role('admin'), (req, res)=>{
     res.sendFile(path.join(__dirname + '/Review_Inventory_Admin_View.html'));
 });
+app.get('/Admin_Reports', isAuthenticated_and_Role('admin'), (req,res)=>{
+    res.sendFile(path.join(__dirname + '/Reports_Admin_View.html'));
+});
+
 //user logout
 app.get('/logout', (req, res) => {
     req.session.destroy((err) => {
@@ -219,6 +223,8 @@ app.post('/adjust_quantity', (req, res) => {
                 // redirection based on user role
                 if(userRole === 'admin'){
                     res.redirect('/Admin_Dashboard');
+                    //COME BACK HERE TO FINISH
+                    //const update_sellers_weekly = "INSERT INTO top_sellers_of_week "
                 }
                 else if(userRole === 'employee'){
                     res.redirect('/dashBoard');
@@ -230,6 +236,7 @@ app.post('/adjust_quantity', (req, res) => {
     }
 });
 // fetch mysql stock data
+// may not need isauthenticated role
 app.get('/current_stock', isAuthenticated_and_Role('admin'), (req,res)=>{
     const query = 'SELECT * FROM products';
     
@@ -238,7 +245,20 @@ app.get('/current_stock', isAuthenticated_and_Role('admin'), (req,res)=>{
             console.error('error getting data from sql', err);
         }
         else{
-            res.json(result);
+            res.json(results);
+        }
+    });
+});
+//displays top sellers
+app.get('/W_top_sellers', isAuthenticated_and_Role('admin'),(req,res)=>{
+    const query = 'SELECT * FROM top_sellers_of_week';
+
+    connection.query(query,(err, results)=>{
+        if(err){
+            console.error('Could not get weekly top sellers. ', err);
+        }
+        else{
+            res.json(results);
         }
     });
 });
@@ -250,9 +270,7 @@ app.get('/current_stock', isAuthenticated_and_Role('admin'), (req,res)=>{
 
 //posts in console that website is located at cite. 
 app.listen(port,()=>{
-
     console.log("The Server is running on http://localhost:3000/homePage");
-
 });
 
 
