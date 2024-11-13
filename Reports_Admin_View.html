@@ -206,7 +206,17 @@
             border-radius: 4px;
             background-color: #f9f9f9; /* Light background */
         }
-        .current_stock {
+        .Week_top_sellers {
+            margin: 0 auto;
+            width: 95%;
+            padding: 5px;
+            border: 5px solid #ccc; /* Light grey border */
+            border-radius: 5px; /* Rounded corners */
+            background-color: #f9f9f9; /* Light background */
+            margin: 20px auto; /* Spacing around the box */
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow */
+        }
+        .year_top_sellers{
             margin: 0 auto;
             width: 95%;
             padding: 5px;
@@ -223,43 +233,8 @@
             justify-content: space-between;
             gap: 20px;
         }
-        .add_new_product{
-            margin: left;
-            width: 95%;
-            padding: 5px;
-            border: 5px solid #ccc; /* Light grey border */
-            border-radius: 5px; /* Rounded corners */
-            background-color: #f9f9f9; /* Light background */
-            margin: 20px auto; /* Spacing around the box */
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow */
-        }
-        .order_more_product{
-            margin: 0 auto;
-            width: 95%;
-            padding: 5px;
-            border: 5px solid #ccc; /* Light grey border */
-            border-radius: 5px; /* Rounded corners */
-            background-color: #f9f9f9; /* Light background */
-            margin: 20px auto; /* Spacing around the box */
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow */
-        }
-        .product_container_2{
-            margin: 0 auto;
-            width: 95%;
-            display:flex;
-            justify-content: space-between;
-            gap: 20px;
-        }
-        .adjust_product_quantity{
-            margin: 0 auto;
-            width: 95%;
-            padding: 5px;
-            border: 5px solid #ccc; /* Light grey border */
-            border-radius: 5px; /* Rounded corners */
-            background-color: #f9f9f9; /* Light background */
-            margin: 20px auto; /* Spacing around the box */
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow */
-        }
+       
+        
     </style>
 </head>
 
@@ -279,8 +254,8 @@
                     <li>
                         <a href="/Admin_Inventory"><i class="fa-solid fa-boxes-packing"></i> Inventory</a>
                     </li>
-                    <li> 
-                        <a href="/Admin_Reports"><i class="fa-solid fa-chart-simple"></i> Reports</a>
+                    <li>  <!--Fix later-->
+                        <a href="/reports"><i class="fa-solid fa-chart-simple"></i> Reports</a>
                     </li>
                     <li> <!--Fix later-->
                         <a href="/documents"><i class="fa-solid fa-file-circle-plus"></i> Documents</a>
@@ -300,16 +275,16 @@
                 <input type="text" placeholder="Search in your Inventory">
             </div>
              <!-- Current Stock Table -->
-            <div class="current_stock">
-                <h3>Current Stock</h3>
+            <div class="Week_top_sellers">
+                <h3>Weekly Top Sellers</h3>
                 <table id="inventoryTable" border="1">
                         <thead>
                             <tr>
-                                <th>Item ID</th>
+                                <!--<th>Item ID</th>-->
                                 <th>Product Name</th>
-                                <th>SKU</th>
-                                <th>Quantity</th>
-                                <th>Location</th>
+                                <!--<th>SKU</th>-->
+                                <th>Quantity Sold</th>
+                                <!--<th>Location</th>-->
                             </tr>
                         </thead>
                     <tbody>
@@ -317,67 +292,31 @@
                     </tbody>  
                 </table>
             </div>
-            <!--holds two boxes for adding product and ordering more-->
-            <div class="product_container">
-                <!--Order More Products-->
-                <div class="add_new_product">
-                    <h3>Add New Product</h3>
-                        <form action="/add_Product" method="POST">
-                        <label for="itemID">Item ID:</label>
-                        <input type="text" id="itemID" name="itemID" required><br><br>
-    
-                        <label for="name">Product Name:</label>
-                        <input type="text" id="name" name="name" required><br><br>
-    
-                        <label for="sku">SKU:</label>
-                        <input type="text" id="sku" name="sku" required><br><br>
-    
-                        <label for="quantity">Quantity:</label>
-                        <input type="number" id="quantity" name="quantity" required><br><br>
-    
-                        <label for="location">Location:</label>
-                        <input type="text" id="location" name="location" required><br><br>
-    
-                        <button type="submit">Add Product</button>
-                    </form>
-                </div>
-                <!--box for ordering more product-->
-                <div class="order_more_product">
-                    <h3>Order More Products</h3>
-                        <form action="/add_Product" method="POST">
-                        <label for="itemID">Item ID:</label>
-                        <input type="text" id="itemID" name="itemID" required><br><br>
-                        
-                        <label for="sku">SKU:</label>
-                        <input type="text" id="sku" name="sku" required><br><br>
-    
-                        <label for="quantity">Quantity:</label>
-                        <input type="number" id="quantity" name="quantity" required><br><br>
-    
-                        <button type="submit">Add Product</button>
-                    </form>
-                </div>
-                
+            <div class="year_top_sellers">
+                <h3>Yearly Top Sellers</h3>
+                <table id="inventoryTable" border="1">
+                        <thead>
+                            <tr>
+                                <!--<th>Item ID</th>-->
+                                <th>Product Name</th>
+                                <!--<th>SKU</th>-->
+                                <th>Quantity Sold</th>
+                                <!--<th>Location</th>-->
+                            </tr>
+                        </thead>
+                    <tbody>
+                            <!-- Data will be inserted here dynamically -->
+                    </tbody>  
+                </table>
             </div>
-            <div class ="product_container_2">
-                <div class="adjust_product_quantity">
-                    <h3>Adjust Product Quantity</h3>
-                    <form action="/adjust_quantity" method="POST">
-                        <label for="itemID">Enter Product Item ID:</label>
-                        <input type="text" id="itemID" name="itemID" required><br><br>
-
-                        <label for="quantity">Quantity Adjustment (+/-):</label>
-                        <input type="number" id="quantity" name="quantity" required><br><br>
-
-                        <button type="submit">Adjust Quantity</button>
-                    </form>
-                </div>
-            </div>
+          
+            
         </div>
     </div>
 </body>
-    <script>
-    fetch('/current_stock')
+    <script> 
+    // calls mysql table for top sellers of the week or year
+    fetch('/W_top_sellers')
         .then(response => response.json())
         .then(data => {
             const tableBody = document.getElementById('inventoryTable').querySelector('tbody');
@@ -387,11 +326,8 @@
                 const row = document.createElement('tr');
 
                 row.innerHTML = `
-                    <td>${item.itemID}</td>
                     <td>${item.name}</td>
-                    <td>${item.SKU}</td>
                     <td>${item.quantity}</td>
-                    <td>${item.location}</td>
                 `;
                 tableBody.appendChild(row);
             });
