@@ -150,8 +150,8 @@
         }
 
         .product_container {
-            flex: 1;
-            width: 450px;
+            display: flex;
+    
         }
 
         .order_more_product {
@@ -178,6 +178,28 @@
             width: 100%;
             padding: 5px;
             margin: 5px 0;
+        }
+        .product_flex_container {
+            display: flex;
+            justify-content: center;
+            gap: 20px; /* Optional: space between boxes */
+        }
+        .add_new_product, .order_product {
+            flex: 1; /* Ensures equal width for both boxes */
+            padding: 10px;
+            background-color: white;
+            border: 1px solid #ddd;
+        }
+        .dropdown-list{
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            position: absolute;
+            width: 100%;
         }
     </style>
 </head>
@@ -217,98 +239,81 @@
             </div>
             <!--Search Bar-->
             <div class="searchInventory">
-                <input type="text" placeholder="Search in your Inventory">
+                <input type="text" id="searchInventory" placeholder="Search in your Inventory">
+                <ul id="searchResultsDropdown" class="dropdown-list"></ul> <!-- List for search results -->
             </div>
             <!-- Current Stock Table -->
 
             <div class="inventory_Section">
                 <div class="current_stock">
                     <h3>Current Stock</h3>
-                    <table>
-                        <tr>
-                            <th>Item ID</th>
-                            <th>Product ID</th>
-                            <th>Quantity</th>
-                            <th>Location</th>
-                            <th>SKU</th>
-
-                        </tr>
-                        <tr>
-                            <td>backend placeholder</td>
-                            <td>backend placeholder</td>
-                            <td>backend placeholder</td>
-                            <td>backend placeholder</td>
-                            <td>backend placeholder</td>
-
-                            </td>
-                        </tr>
+                    <table id="inventoryTable">
+                        <thead>
+                            <tr>
+                                <th>Item ID</th>
+                                <th>Product Name</th>
+                                <th>SKU</th>
+                                <th>Quantity</th>
+                                <th>Location</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+        
+                        </tbody>
                     </table>
-                    <tbody>
-                        // Data will be inserted here dynamically, delete this part //
-                    </tbody>
-                    <!-- place holder for fernando's code C1-->
-                    <div class="product_container">
+                </div>
+            </div>
+            <div class="product_container">
+                    <div class="add_new_product">
                         <h3>Add New Product</h3>
                         <label for="itemID">Item ID:</label>
                         <input type="text" id="itemID" name="itemID" required><br><br>
-
+        
                         <label for="name">Product Name:</label>
                         <input type="text" id="name" name="name" required><br><br>
-
+        
                         <label for="sku">SKU:</label>
                         <input type="text" id="sku" name="sku" required><br><br>
-
+        
                         <label for="quantity">Quantity:</label>
                         <input type="number" id="quantity" name="quantity" required><br><br>
-
+        
                         <label for="location">Location:</label>
                         <input type="text" id="location" name="location" required><br><br>
-
+        
                         <button type="submit">Add Product</button>
                     </div>
-                </div>
-                <!--place holder fernando's code  C2-->
+                    <div class="order_product">
+                        <h3>Order Product</h3>
+                        <label for="itemID">Item ID:</label>
+                        <input type="text" id="itemID" name="itemID" required><br><br>
+        
+                        <label for="name">Product Name:</label>
+                        <input type="text" id="name" name="name" required><br><br>
+        
+                        <label for="quantity">Quantity:</label>
+                        <input type="number" id="quantity" name="quantity" required><br><br>
+        
+                        <button type="submit">Add Product</button>
+                    </div>
+                    <div class="product_container_2">
+                        <h3>Adjust Product Quantity</h3>
+                        <form action="/adjust_quantity" method="POST">
+                            <label for="itemID">Enter Product Item ID:</label>
+                            <input type="text" id="itemID" name="itemID" required><br><br>
+        
+                            <label for="quantity">Quantity Adjustment (+/-):</label>
+                            <input type="number" id="quantity" name="quantity" required><br><br>
+        
+                            <button type="submit">Adjust Quantity</button>
+                        </form>
+        
+                    </div>
             </div>
+            
+        
 
-            <div class="order_more_product">
-
-                <h3>Add New Product</h3>
-                <form action="/add_Product" method="POST">
-                    <label for="itemID">Item ID:</label>
-                    <input type="text" id="itemID" name="itemID" required><br><br>
-
-                    <label for="name">Product Name:</label>
-                    <input type="text" id="name" name="name" required><br><br>
-
-                    <label for="sku">SKU:</label>
-                    <input type="text" id="sku" name="sku" required><br><br>
-
-                    <label for="quantity">Quantity:</label>
-                    <input type="number" id="quantity" name="quantity" required><br><br>
-
-                    <label for="location">Location:</label>
-                    <input type="text" id="location" name="location" required><br><br>
-
-                    <button type="submit">Add Product</button>
-                </form>
-
-
-            </div>
-
-            <div class="product_container_2">
-
-                <h3>Adjust Product Quantity</h3>
-                <form action="/adjust_quantity" method="POST">
-                    <label for="itemID">Enter Product Item ID:</label>
-                    <input type="text" id="itemID" name="itemID" required><br><br>
-
-                    <label for="quantity">Quantity Adjustment (+/-):</label>
-                    <input type="number" id="quantity" name="quantity" required><br><br>
-
-                    <button type="submit">Adjust Quantity</button>
-                </form>
-
-            </div>
+            
         </div>
     </div>
 </body>

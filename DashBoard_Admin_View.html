@@ -10,6 +10,7 @@
         #dashBoard {
             display: flex;
             flex-direction: row;
+
         }
 
         div.dashBoardSideBar {
@@ -63,6 +64,7 @@
             font-size: 18px;
             text-transform: uppercase;
             color: #fff;
+
         }
 
         ul.dashBoardMenuList li a {
@@ -99,85 +101,96 @@
 
         /*contents displayed*/
 
-        div.dashBoardInfoMain {
-            padding: 80px 10px 10px;
-        }
+
 
         div.dashBoardInfoMain {
             background: #fff;
             max-height: 900px;
             height: 100%;
             height: 80%;
+
         }
 
-        /* Add product form */
-        .add-product-form {
-            margin-top: 20px;
-            background: #f4f4f4;
-            padding: 20px;
-            border-radius: 5px;
+        /* style for the dashboard info being displayed  */
+
+
+
+
+        .dashBoardInfoMain {
+            background: #fff;
+            padding: 80px 10px 10px;
+            max-height: 900px;
+            height: 100%;
         }
 
-        .add-product-form label {
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        .add-product-form input {
+        /* Search Bar */
+        .search_bar input {
             width: 100%;
             padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 4px;
-            border: 1px solid #ccc;
+            font-size: 16px;
         }
 
-        .add-product-form button {
-            padding: 10px 20px;
-            background-color: #5cb85c;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
+        /* Inventory Sections */
+        .inventory_sections {
+            display: flex;
+            gap: 20px;
         }
 
-        .add-product-form button:hover {
-            background-color: #4cae4c;
-        }
-
-        /* Increment/Decrement form */
-        .quantity-adjust-form {
-            margin-top: 20px;
-            background: #f4f4f4;
+        .current_stock,
+        .adjust_quantity,
+        .top_sellers,
+        .Low_stock {
+            border: 1px solid #ddd;
             padding: 20px;
-            border-radius: 5px;
+            background-color: #f9f9f9;
         }
 
-        .quantity-adjust-form label {
+        .current_stock {
+            flex: 1;
+        }
+
+        .adjust_quantity {
+            width: 250px;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        /* Adjust Quantity Section */
+        .adjust_quantity label {
             display: block;
-            margin-bottom: 5px;
+            margin-top: 10px;
         }
 
-        .quantity-adjust-form input {
+        .adjust_quantity input {
+            width: 100%;
+            padding: 5px;
+            margin: 5px 0;
+        }
+
+        .adjust_quantity button {
             width: 100%;
             padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 4px;
-            border: 1px solid #ccc;
-        }
-
-        .quantity-adjust-form button {
-            padding: 10px 20px;
-            background-color: #5cb85c;
-            color: white;
+            background-color: white;
+            color: black;
             border: none;
-            border-radius: 4px;
-            cursor: pointer;
+            margin-top: 10px;
+            outline-style: black;
         }
-
-        .quantity-adjust-form button:hover {
-            background-color: #4cae4c;
+        .inventoryTable{
+            width: 100%;
         }
     </style>
+
 </head>
 
 <body>
@@ -187,104 +200,173 @@
             <div class="dashBoardUser">
                 <img src="/images/Screenshot 2024-10-18 at 8.14.15 AM.png" alt="User image." />
                 <span>Snoop</span>
+
             </div>
             <div class="dashBoardMenu">
                 <ul class="dashBoardMenuList">
                     <li class="menuInUse">
-                        <a href="/Admin_Dashboard"><i class="fa-solid fa-house"></i> Dashboard</a>
+                        <a href="/Admin_Dashboard"><i class="  fa-solid fa-house"></i> Dashboard</a>
                     </li>
                     <li>
                         <a href="/Admin_Inventory"><i class="fa-solid fa-boxes-packing"></i> Inventory</a>
                     </li>
                     <li>
-                        <a href="/reports"><i class="fa-solid fa-chart-simple"></i> Reports</a>
+                        <a href="/Admin_Reports"><i class="fa-solid fa-chart-simple"></i> Reports</a>
                     </li>
                     <li>
-                        <a href="/documents"><i class="fa-solid fa-file-circle-plus"></i> Documents</a>
+                        <a href=""><i class="fa-solid fa-file-circle-plus"></i> Documents</a>
                     </li>
+
                 </ul>
             </div>
         </div>
-       
         <div class="dashBoardInfo" id="dashBoardInfo">
             <div class="dashBoardInfoHeader">
                 <a href="" id="toggleButton"><i class="fa-solid fa-bars"></i></a>
-                <a href="index" id="logoutButton"><i class="fa-solid fa-right-from-bracket"></i>Log-Out</a>
+                <a href="/index" id="logoutButton"><i class="fa-solid fa-right-from-bracket"></i>Log-Out</a>
             </div>
             <div class="dashBoardInfoMain">
-                <!-- Add Product Form -->
-                <div class="add-product-form">
-                    <h3>Add New Product</h3>
-                    <form action="/add_Product" method="POST">
-                        <label for="itemID">Item ID:</label>
-                        <input type="text" id="itemID" name="itemID" required><br><br>
+                <div class="dashBoardInfoSub">
 
-                        <label for="name">Product Name:</label>
-                        <input type="text" id="name" name="name" required><br><br>
+                    <div class="dashBoardInfoMain">
+                        <div class="dashBoardInfoSub">
+                            <div class="dashBoardInfoSub">
+                                <!--
+                                <div class="search_bar">
+                                    <input type="text" placeholder="Search in your Inventory">
+                                </div>
+                            -->
+                                <div class="inventory_sections">
+                                    <div class="current_stock">
+                                        <h3>Current Stock</h3>
+                                        <table id="inventoryTable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Item Name</th>
+                                                    <th>Quantity</th>
+                                                    <th>Location on Site</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody> 
+                                            </tbody>
+                                            <!--for every input there will be a new 
+                                            tr> This the new row created
 
-                        <label for="sku">SKU:</label>
-                        <input type="text" id="sku" name="sku" required><br><br>
+                                            <td> nasndinaw</td>
+                                            <td> nasndinaw</td>
+                                            <td> nasndinaw</td>
+                                            These 3 are the new items being added, that being the database giving this information
 
-                        <label for="quantity">Quantity:</label>
-                        <input type="number" id="quantity" name="quantity" required><br><br>
+                                            </tr>, just an fyi
+                                            -->
+                                        </table>
+                                    </div>
+                                    <div class="adjust_quantity">
+                                        <h3>Adjust Product Quantity</h3>
+                                        <label for="productID">Enter Product Item ID or Name:</label>
+                                        <input type="text" id="productID">
+                                        <label for="quantityAdjustment">Quantity Adjustment (+/-):</label>
+                                        <input type="number" id="quantityAdjustment">
+                                        <button type="submit">Adjust</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="Low_stock">
+                            <h3>Low Stock on these items </h3>
+                            <table id="low_stock">
+                                <thead>
+                                    <tr>
+                                        <th>Item Name</th>
+                                        <th>Item Quntity</th>
+                                    </tr>
+                                </thead>
+                                <tbody> 
+                                </tbody>
+                            </table>
+                        </div>
 
-                        <label for="location">Location:</label>
-                        <input type="text" id="location" name="location" required><br><br>
-
-                        <button type="submit">Add Product</button>
-                    </form>
-                </div>
-
-                <!-- Increment/Decrement Quantity Form -->
-                <div class="quantity-adjust-form">
-                    <h3>Adjust Product Quantity</h3>
-                    <form action="/adjust_quantity" method="POST">
-                        <label for="itemID">Enter Product Item ID:</label>
-                        <input type="text" id="itemID" name="itemID" required><br><br>
-
-                        <label for="quantity">Quantity Adjustment (+/-):</label>
-                        <input type="number" id="quantity" name="quantity" required><br><br>
-
-                        <button type="submit">Adjust Quantity</button>
-                    </form>
+                        <div class="top_sellers">
+                            <h3>Top Sellers of the Month</h3>
+                            <table id="top_sellers_of_month">
+                                <thead>
+                                    <tr>
+                                        <th>Item Name</th>
+                                        <th>Quantity</th>
+                                        <th>Sales this Month</th>
+                                    </tr>
+                                </thead>
+                                <tbody> 
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
+    </div>
     <script>
+
         var sideBarIsOpen = true;
 
-        toggleButton.addEventListener('click', () => {
+        toggleButton.addEventListener('click', (event) => {
+            event.preventDefault();  // Only for the toggle button
             if (sideBarIsOpen) {
-                event.preventDefault();
                 dashBoardSideBar.style.width = '20%';
                 dashBoardInfo.style.width = '90%';
                 sideBarIsOpen = false;
             } else {
-                event.preventDefault();
                 dashBoardSideBar.style.width = '30%';
                 dashBoardInfo.style.width = '70%';
                 sideBarIsOpen = true;
             }
         });
     </script>
+    <script>
+        fetch('/current_stock')
+            .then(response => response.json())
+            .then(data => {
+                const tableBody = document.getElementById('inventoryTable').querySelector('tbody');
+                tableBody.innerHTML = ''; // Clear any previous data
+    
+                data.forEach(item => {
+                    const row = document.createElement('tr');
+    
+                    row.innerHTML = `
+                        <td>${item.name}</td>
+                        <td>${item.quantity}</td>
+                        <td>${item.location}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching inventory data:', error);
+            });
+    </script>
+    <script>
+        fetch('/top_sellers_of_month')
+            .then(response => response.json())
+            .then(data => {
+                const tableBody = document.getElementById('top_sellers_of_month').querySelector('tbody');
+                tableBody.innerHTML = ''; // Clear any previous data
+        
+                data.forEach(item => {
+                    const row = document.createElement('tr');
+        
+                    row.innerHTML = `
+                        <td>${item.M_name}</td>
+                        <td>${item.M_quantity}</td>
+                        <td>${item.M_sales}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching top sellers data:', error);
+            });
+    </script>
 </body>
 
 </html>
-
-<script>
-    let inactivityTime = function () {
-        let timer;
-
-        // resets timer when user moves mouse/press key
-        window.onload = resetTimer;
-        document.onmousemove = resetTimer;
-        document.onkeypress = resetTimer;
-
-        function logout() {
-            alert("You've been logged out due to inactivity.");
-            window.location.href = "/logout";
-        }
-    }
-</script>
