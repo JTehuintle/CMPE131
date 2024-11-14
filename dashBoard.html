@@ -105,7 +105,8 @@
 
         div.dashBoardInfoMain {
             background: #fff;
-            max-height: 900px;
+            padding: 20px 10px 10px;
+            /* max-height: 900px;*/
             height: 100%;
             height: 80%;
 
@@ -123,7 +124,7 @@
             height: 100%;
         }
 
-        /* Search Bar */
+        /* Search Bar 
         .search_bar input {
             width: 100%;
             padding: 10px;
@@ -136,14 +137,19 @@
             gap: 20px;
         }
 
+
         .current_stock,
         .adjust_quantity,
         .top_sellers,
         .Low_stock {
+            margin-top: 20px;
             border: 1px solid #ddd;
             padding: 20px;
-            background-color: #f9f9f9;
+            background-color: white;
+
+
         }
+
 
         .current_stock {
             flex: 1;
@@ -177,14 +183,21 @@
             margin: 5px 0;
         }
 
+
         .adjust_quantity button {
             width: 100%;
             padding: 10px;
             background-color: white;
             color: black;
-            border: none;
+            border: 1px solid black;
+            border-radius: 5px;
             margin-top: 10px;
-            outline-style: black;
+            font-weight: bold;
+        }
+
+
+        .adjust_quantity button:hover {
+            background-color: gray;
         }
     </style>
 
@@ -224,26 +237,22 @@
             </div>
             <div class="dashBoardInfoMain">
                 <div class="dashBoardInfoSub">
-
-                    <div class="dashBoardInfoMain">
-                        <div class="dashBoardInfoSub">
-                            <div class="dashBoardInfoSub">
-                                <!--
+                    <!--
                                 <div class="search_bar">
                                     <input type="text" placeholder="Search in your Inventory">
                                 </div>
                             -->
-                                <div class="inventory_sections">
-                                    <div class="current_stock">
-                                        <h3>Current Stock</h3>
-                                        <table>
-                                            <tr>
-                                                <th>Item Name</th>
-                                                <th>Quantity</th>
-                                                <th>Location on Site</th>
-                                            </tr>
+                    <div class="inventory_sections">
+                        <div class="current_stock">
+                            <h3>Current Stock</h3>
+                            <table>
+                                <tr>
+                                    <th>Item Name</th>
+                                    <th>Quantity</th>
+                                    <th>Location on Site</th>
+                                </tr>
 
-                                            <!--for every input there will be a new 
+                                <!--for every input there will be a new 
                                             tr> This the new row created
 
                                             <td> nasndinaw</td>
@@ -254,73 +263,73 @@
                                             </tr>, just an fyi
                                             -->
 
-                                            <tr>
-                                                <td>backend placeholder</td>
-                                                <td>backend placeholder</td>
-                                                <td>backend placeholder</td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                    <div class="adjust_quantity">
-                                        <h3>Adjust Product Quantity</h3>
-                                        <label for="productID">Enter Product Item ID or Name:</label>
-                                        <input type="text" id="productID">
-                                        <label for="quantityAdjustment">Quantity Adjustment (+/-):</label>
-                                        <input type="number" id="quantityAdjustment">
-                                        <button>Adjust</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="Low_stock">
-                            <h3>Low Stock on these items </h3>
-                            <table>
-
-                                <tr>
-                                    <th> Item Name</th>
-                                    <th> Item Quntity</th>
-                                </tr>
-
                                 <tr>
                                     <td>backend placeholder</td>
                                     <td>backend placeholder</td>
+                                    <td>backend placeholder</td>
                                 </tr>
-
                             </table>
-
-
                         </div>
-
-                        <div class="top_sellers">
-                            <h3>Top Sellers of the Month</h3>
-                            <table>
-                                <tr>
-                                    <th>Item Name</th>
-                                    <th>Quantity</th>
-                                    <th>Sales this Month</th>
-
-
-                                </tr>
-                                <tr>
-                                    <td> backend placeholder</td>
-                                    <td> backend placeholder</td>
-                                    <td> backend placeholder</td>
-
-                                </tr>
-
-                                <tr>
-                                    <td> backend placeholder</td>
-                                    <td> backend placeholder</td>
-                                    <td> backend placeholder</td>
-
-                                </tr>
-
-                            </table>
+                        <div class="adjust_quantity">
+                            <h3>Adjust Product Quantity</h3>
+                            <label for="productID">Enter Product Item ID or Name:</label>
+                            <input type="text" id="productID">
+                            <label for="quantityAdjustment">Quantity Adjustment (+/-):</label>
+                            <input type="number" id="quantityAdjustment">
+                            <button type="submit" id="adjustButton">Adjust</button>
                         </div>
                     </div>
+
+                </div>
+                <div class="Low_stock">
+                    <h3>Low Stock on these items </h3>
+                    <table>
+
+                        <tr>
+                            <th> Item Name</th>
+                            <th> Item Quntity</th>
+                        </tr>
+
+                        <tr>
+                            <td>backend placeholder</td>
+                            <td>backend placeholder</td>
+                        </tr>
+
+                    </table>
+
+
+                </div>
+
+                <div class="top_sellers">
+                    <h3>Top Sellers of the Month</h3>
+                    <table>
+                        <tr>
+                            <th>Item Name</th>
+                            <th>Quantity</th>
+                            <th>Sales this Month</th>
+
+
+                        </tr>
+                        <tr>
+                            <td> backend placeholder</td>
+                            <td> backend placeholder</td>
+                            <td> backend placeholder</td>
+
+                        </tr>
+
+                        <tr>
+                            <td> backend placeholder</td>
+                            <td> backend placeholder</td>
+                            <td> backend placeholder</td>
+
+                        </tr>
+
+                    </table>
                 </div>
             </div>
         </div>
+    </div>
+    </div>
     </div>
     </div>
     <script>

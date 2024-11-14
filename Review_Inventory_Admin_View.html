@@ -103,88 +103,7 @@
             float: right;
         }
 
-        /*contents displayed*/
-
-        div.dashBoardInfoMain {
-            padding: 80px 10px 10px;
-        }
-
-        div.dashBoardInfoMain {
-            background: #fff;
-            max-height: 900px;
-            height: 100%;
-            height: 80%;
-        }
-
-        /* Add product form */
-        .add-product-form {
-            margin-top: 20px;
-            background: #f4f4f4;
-            padding: 20px;
-            border-radius: 5px;
-        }
-
-        .add-product-form label {
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        .add-product-form input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 4px;
-            border: 1px solid #ccc;
-        }
-
-        .add-product-form button {
-            padding: 10px 20px;
-            background-color: #5cb85c;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .add-product-form button:hover {
-            background-color: #4cae4c;
-        }
-
-        /* Increment/Decrement form */
-        .quantity-adjust-form {
-            margin-top: 20px;
-            background: #f4f4f4;
-            padding: 20px;
-            border-radius: 5px;
-        }
-
-        .quantity-adjust-form label {
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        .quantity-adjust-form input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 4px;
-            border: 1px solid #ccc;
-        }
-
-        .quantity-adjust-form button {
-            padding: 10px 20px;
-            background-color: #5cb85c;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .quantity-adjust-form button:hover {
-            background-color: #4cae4c;
-        }
-
-        .search_inventory input[type = text]{
+        .search_inventory input[type=text] {
             float: right;
             padding: 6px;
             border: none;
@@ -198,67 +117,67 @@
             margin-top: 10px;
             padding: 10px;
         }
+
         .searchInventory input[type="text"] {
             width: 95%;
             padding: 10px;
             font-size: 16px;
             border: 1px solid #ccc;
             border-radius: 4px;
-            background-color: #f9f9f9; /* Light background */
+            background-color: #f9f9f9;
+
         }
+
+        /* Right side inventory  */
+
+        .inventory_Section {
+            display: flex;
+            gap: 10px;
+        }
+
+        .current_stock,
+        .product_container,
+        .order_more_product,
+        .product_container_2 {
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            background-color: white;
+        }
+
         .current_stock {
-            margin: 0 auto;
-            width: 95%;
+            flex: 1;
+        }
+
+        .product_container {
+            flex: 1;
+            width: 450px;
+        }
+
+        .order_more_product {
+            width: 450px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .product_container label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        .product_container input {
+            width: 100%;
             padding: 5px;
-            border: 5px solid #ccc; /* Light grey border */
-            border-radius: 5px; /* Rounded corners */
-            background-color: #f9f9f9; /* Light background */
-            margin: 20px auto; /* Spacing around the box */
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow */
-        }
-        .product_container{
-            margin: 0 auto;
-            width: 95%;
-            display:flex;
-            justify-content: space-between;
-            gap: 20px;
-        }
-        .add_new_product{
-            margin: left;
-            width: 95%;
-            padding: 5px;
-            border: 5px solid #ccc; /* Light grey border */
-            border-radius: 5px; /* Rounded corners */
-            background-color: #f9f9f9; /* Light background */
-            margin: 20px auto; /* Spacing around the box */
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow */
-        }
-        .order_more_product{
-            margin: 0 auto;
-            width: 95%;
-            padding: 5px;
-            border: 5px solid #ccc; /* Light grey border */
-            border-radius: 5px; /* Rounded corners */
-            background-color: #f9f9f9; /* Light background */
-            margin: 20px auto; /* Spacing around the box */
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow */
-        }
-        .product_container_2{
-            margin: 0 auto;
-            width: 95%;
-            display:flex;
-            justify-content: space-between;
-            gap: 20px;
-        }
-        .adjust_product_quantity{
-            margin: 0 auto;
-            width: 95%;
-            padding: 5px;
-            border: 5px solid #ccc; /* Light grey border */
-            border-radius: 5px; /* Rounded corners */
-            background-color: #f9f9f9; /* Light background */
-            margin: 20px auto; /* Spacing around the box */
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow */
+            margin: 5px 0;
         }
     </style>
 </head>
@@ -279,17 +198,18 @@
                     <li>
                         <a href="/Admin_Inventory"><i class="fa-solid fa-boxes-packing"></i> Inventory</a>
                     </li>
-                    <li> 
+                    <li>
                         <a href="/Admin_Reports"><i class="fa-solid fa-chart-simple"></i> Reports</a>
                     </li>
-                    <li> <!--Fix later-->
+                    <li>
+                        <!--Fix later-->
                         <a href="/documents"><i class="fa-solid fa-file-circle-plus"></i> Documents</a>
                     </li>
                 </ul>
-                
+
             </div>
         </div>
-    
+
         <div class="dashBoardInfo" id="dashBoardInfo">
             <div class="dashBoardInfoHeader">
                 <a href="" id="toggleButton"><i class="fa-solid fa-bars"></i></a>
@@ -299,84 +219,100 @@
             <div class="searchInventory">
                 <input type="text" placeholder="Search in your Inventory">
             </div>
-             <!-- Current Stock Table -->
-            <div class="current_stock">
-                <h3>Current Stock</h3>
-                <table id="inventoryTable" border="1">
-                        <thead>
-                            <tr>
-                                <th>Item ID</th>
-                                <th>Product Name</th>
-                                <th>SKU</th>
-                                <th>Quantity</th>
-                                <th>Location</th>
-                            </tr>
-                        </thead>
+            <!-- Current Stock Table -->
+
+            <div class="inventory_Section">
+                <div class="current_stock">
+                    <h3>Current Stock</h3>
+                    <table>
+                        <tr>
+                            <th>Item ID</th>
+                            <th>Product ID</th>
+                            <th>Quantity</th>
+                            <th>Location</th>
+                            <th>SKU</th>
+
+                        </tr>
+                        <tr>
+                            <td>backend placeholder</td>
+                            <td>backend placeholder</td>
+                            <td>backend placeholder</td>
+                            <td>backend placeholder</td>
+                            <td>backend placeholder</td>
+
+                            </td>
+                        </tr>
+                    </table>
                     <tbody>
-                            <!-- Data will be inserted here dynamically -->
-                    </tbody>  
-                </table>
-            </div>
-            <!--holds two boxes for adding product and ordering more-->
-            <div class="product_container">
-                <!--Order More Products-->
-                <div class="add_new_product">
-                    <h3>Add New Product</h3>
-                        <form action="/add_Product" method="POST">
+                        // Data will be inserted here dynamically, delete this part //
+                    </tbody>
+                    <!-- place holder for fernando's code C1-->
+                    <div class="product_container">
+                        <h3>Add New Product</h3>
                         <label for="itemID">Item ID:</label>
                         <input type="text" id="itemID" name="itemID" required><br><br>
-    
+
                         <label for="name">Product Name:</label>
                         <input type="text" id="name" name="name" required><br><br>
-    
+
                         <label for="sku">SKU:</label>
                         <input type="text" id="sku" name="sku" required><br><br>
-    
+
                         <label for="quantity">Quantity:</label>
                         <input type="number" id="quantity" name="quantity" required><br><br>
-    
+
                         <label for="location">Location:</label>
                         <input type="text" id="location" name="location" required><br><br>
-    
+
                         <button type="submit">Add Product</button>
-                    </form>
+                    </div>
                 </div>
-                <!--box for ordering more product-->
-                <div class="order_more_product">
-                    <h3>Order More Products</h3>
-                        <form action="/add_Product" method="POST">
-                        <label for="itemID">Item ID:</label>
-                        <input type="text" id="itemID" name="itemID" required><br><br>
-                        
-                        <label for="sku">SKU:</label>
-                        <input type="text" id="sku" name="sku" required><br><br>
-    
-                        <label for="quantity">Quantity:</label>
-                        <input type="number" id="quantity" name="quantity" required><br><br>
-    
-                        <button type="submit">Add Product</button>
-                    </form>
-                </div>
-                
+                <!--place holder fernando's code  C2-->
             </div>
-            <div class ="product_container_2">
-                <div class="adjust_product_quantity">
-                    <h3>Adjust Product Quantity</h3>
-                    <form action="/adjust_quantity" method="POST">
-                        <label for="itemID">Enter Product Item ID:</label>
-                        <input type="text" id="itemID" name="itemID" required><br><br>
 
-                        <label for="quantity">Quantity Adjustment (+/-):</label>
-                        <input type="number" id="quantity" name="quantity" required><br><br>
+            <div class="order_more_product">
 
-                        <button type="submit">Adjust Quantity</button>
-                    </form>
-                </div>
+                <h3>Add New Product</h3>
+                <form action="/add_Product" method="POST">
+                    <label for="itemID">Item ID:</label>
+                    <input type="text" id="itemID" name="itemID" required><br><br>
+
+                    <label for="name">Product Name:</label>
+                    <input type="text" id="name" name="name" required><br><br>
+
+                    <label for="sku">SKU:</label>
+                    <input type="text" id="sku" name="sku" required><br><br>
+
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" id="quantity" name="quantity" required><br><br>
+
+                    <label for="location">Location:</label>
+                    <input type="text" id="location" name="location" required><br><br>
+
+                    <button type="submit">Add Product</button>
+                </form>
+
+
+            </div>
+
+            <div class="product_container_2">
+
+                <h3>Adjust Product Quantity</h3>
+                <form action="/adjust_quantity" method="POST">
+                    <label for="itemID">Enter Product Item ID:</label>
+                    <input type="text" id="itemID" name="itemID" required><br><br>
+
+                    <label for="quantity">Quantity Adjustment (+/-):</label>
+                    <input type="number" id="quantity" name="quantity" required><br><br>
+
+                    <button type="submit">Adjust Quantity</button>
+                </form>
+
             </div>
         </div>
     </div>
 </body>
-    <script>
+<script>
     fetch('/current_stock')
         .then(response => response.json())
         .then(data => {
@@ -400,23 +336,23 @@
             console.error('Error fetching inventory data:', error);
         });
 </script>
-    <script>
-        var sideBarIsOpen = true;
+<script>
+    var sideBarIsOpen = true;
 
-        toggleButton.addEventListener('click', () => {
-            if (sideBarIsOpen) {
-                event.preventDefault();
-                dashBoardSideBar.style.width = '20%';
-                dashBoardInfo.style.width = '90%';
-                sideBarIsOpen = false;
-            } else {
-                event.preventDefault();
-                dashBoardSideBar.style.width = '30%';
-                dashBoardInfo.style.width = '70%';
-                sideBarIsOpen = true;
-            }
-        });
-    </script>
+    toggleButton.addEventListener('click', () => {
+        if (sideBarIsOpen) {
+            event.preventDefault();
+            dashBoardSideBar.style.width = '20%';
+            dashBoardInfo.style.width = '90%';
+            sideBarIsOpen = false;
+        } else {
+            event.preventDefault();
+            dashBoardSideBar.style.width = '30%';
+            dashBoardInfo.style.width = '70%';
+            sideBarIsOpen = true;
+        }
+    });
+</script>
 </body>
 
 </html>
@@ -436,3 +372,259 @@
         }
     }
 </script>
+
+<!-- 
+            Fernando's current_stock chart   C1
+            <div class="current_stock">
+                <h3>Current Stock</h3>
+                <table id="inventoryTable" border="1">
+                    <thead>
+                        <tr>
+                            <th>Item ID</th>
+                            <th>Product Name</th>
+                            <th>SKU</th>
+                            <th>Quantity</th>
+                            <th>Location</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        // Data will be inserted here dynamically //
+                    </tbody>
+                </table>
+            </div>
+
+            -->
+<!--holds two boxes for adding product and ordering more
+                <div class="product_container">
+                    <--Order More Products
+                    <div class="add_new_product">
+                        <h3>Add New Product</h3>
+                        <form action="/add_Product" method="POST">
+                            <label for="itemID">Item ID:</label>
+                            <input type="text" id="itemID" name="itemID" required><br><br>
+
+                            <label for="name">Product Name:</label>
+                            <input type="text" id="name" name="name" required><br><br>
+
+                            <label for="sku">SKU:</label>
+                            <input type="text" id="sku" name="sku" required><br><br>
+
+                            <label for="quantity">Quantity:</label>
+                            <input type="number" id="quantity" name="quantity" required><br><br>
+
+                            <label for="location">Location:</label>
+                            <input type="text" id="location" name="location" required><br><br>
+
+                            <button type="submit">Add Product</button>
+                        </form>
+                    </div>
+                    -->
+
+<!--
+                    box for ordering more product      C2
+            <div class="order_more_product">
+                <h3>Order More Products</h3>
+                <form action="/add_Product" method="POST">
+                    <label for="itemID">Item ID:</label>
+                    <input type="text" id="itemID" name="itemID" required><br><br>
+
+                    <label for="sku">SKU:</label>
+                    <input type="text" id="sku" name="sku" required><br><br>
+
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" id="quantity" name="quantity" required><br><br>
+
+                    <button type="submit">Add Product</button>
+                </form>
+            </div>
+            -->
+
+<!--
+            
+                Styling for Fernando's code C3
+            contents displayed
+    
+            div.dashBoardInfoMain {
+                padding: 80px 10px 10px;
+            }
+    
+            div.dashBoardInfoMain {
+                background: #fff;
+                max-height: 900px;
+                height: 100%;
+                height: 80%;
+            }
+    
+           Add product form
+            .add-product-form {
+                margin-top: 20px;
+                background: #f4f4f4;
+                padding: 20px;
+                border-radius: 5px;
+            }
+    
+            .add-product-form label {
+                display: block;
+                margin-bottom: 5px;
+            }
+    
+            .add-product-form input {
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 10px;
+                border-radius: 4px;
+                border: 1px solid #ccc;
+            }
+    
+            .add-product-form button {
+                padding: 10px 20px;
+                background-color: #5cb85c;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+    
+            .add-product-form button:hover {
+                background-color: #4cae4c;
+            }
+    
+             Increment/Decrement form 
+            .quantity-adjust-form {
+                margin-top: 20px;
+                background: #f4f4f4;
+                padding: 20px;
+                border-radius: 5px;
+            }
+    
+            .quantity-adjust-form label {
+                display: block;
+                margin-bottom: 5px;
+            }
+    
+            .quantity-adjust-form input {
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 10px;
+                border-radius: 4px;
+                border: 1px solid #ccc;
+            }
+    
+            .quantity-adjust-form button {
+                padding: 10px 20px;
+                background-color: #5cb85c;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+    
+            .quantity-adjust-form button:hover {
+                background-color: #4cae4c;
+            }
+    
+            .search_inventory input[type=text] {
+                float: right;
+                padding: 6px;
+                border: none;
+                margin-top: 8px;
+                margin-right: 16px;
+                font-size: 17px
+            }
+    
+            .searchInventory {
+                text-align: center;
+                margin-top: 10px;
+                padding: 10px;
+            }
+    
+            .searchInventory input[type="text"] {
+                width: 95%;
+                padding: 10px;
+                font-size: 16px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                background-color: #f9f9f9;
+                Light background 
+            }
+    
+            .current_stock {
+                margin: 0 auto;
+                width: 95%;
+                padding: 5px;
+                border: 5px solid #ccc;
+                / Light grey border /
+                border-radius: 5px;
+                / Rounded corners /
+                background-color: #f9f9f9;
+                / Light background /
+                margin: 20px auto;
+                / Spacing around the box /
+                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+                / Optional shadow /
+            }
+    
+            .product_container {
+                margin: 0 auto;
+                width: 95%;
+                display: flex;
+                justify-content: space-between;
+                gap: 20px;
+            }
+    
+            .add_new_product {
+                margin: left;
+                width: 95%;
+                padding: 5px;
+                border: 5px solid #ccc;
+                /Light grey border /
+                border-radius: 5px;
+                /* Rounded corners /
+                background-color: #f9f9f9;
+                /* Light background /
+                margin: 20px auto;
+                /* Spacing around the box /
+                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+                /* Optional shadow /
+            }
+    
+            .order_more_product {
+                margin: 0 auto;
+                width: 95%;
+                padding: 5px;
+                border: 5px solid #ccc;
+                /* Light grey border /
+                border-radius: 5px;
+                /* Rounded corners /
+                background-color: #f9f9f9;
+                /* Light background /
+                margin: 20px auto;
+                /* Spacing around the box /
+                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+                /* Optional shadow /
+            }
+    
+            .product_container_2 {
+                margin: 0 auto;
+                width: 95%;
+                display: flex;
+                justify-content: space-between;
+                gap: 20px;
+            }
+    
+            .adjust_product_quantity {
+                margin: 0 auto;
+                width: 95%;
+                padding: 5px;
+                border: 5px solid #ccc;
+                /* Light grey border /
+                border-radius: 5px;
+                /* Rounded corners /
+                background-color: #f9f9f9;
+                /* Light background /
+                margin: 20px auto;
+                /* Spacing around the box /
+                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+                /* Optional shadow /
+            }
+            -->
