@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Snoop 131 - Dashboard</title>
+    <!-- Link to the CSS stylesheet -->
+    <script src="https://kit.fontawesome.com/2bb5d6196b.js"></script>
+    <style>
+        #dashBoard {
+            display: flex;
+            /*flex-direction: row;*/
+        }
+
+        div.dashBoardSideBar {
+            width: 30%;
+            background: #232323;
+            height: 100vh;
+        }
+
+        div.dashBoardInfo {
+            width: 70%;
+        }
+
+        h3.dashBoardLogo {
+            color: #fff;
+            font-size: 45px;
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        div.dashBoardUser {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+            gap: 10px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #fff;
+        }
+
+        div.dashBoardUser img {
+            width: 70px;
+            display: inline-block;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            margin-left: 10px;
+        }
+
+        div.dashBoardUser span {
+            font-size: 18px;
+            text-transform: uppercase;
+            color: #fff;
+            text-align: center;
+        }
+
+        ul.dashBoardMenuList {
+            list-style-type: none;
+        }
+
+        ul.dashBoardMenuList li {
+            padding: 10px 0px;
+            font-size: 18px;
+            text-transform: uppercase;
+            color: #fff;
+        }
+
+        ul.dashBoardMenuList li a {
+            text-decoration: none;
+            display: block;
+            color: #fff;
+        }
+
+        ul.dashBoardMenuList li.menuInUse {
+            background-color: grey;
+            transition: 0.3ms;
+        }
+
+        ul.dashBoardMenuList li:hover {
+            background-color: grey;
+            transition: 0.3ms all;
+        }
+
+        /*dashboard right side*/
+        div.dashBoardInfoHeader {
+            background: #232323;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: right;
+        }
+
+        div.dashBoardInfoHeader a {
+            color: #fff;
+            font-size: 18px;
+            text-decoration: none;
+        }
+
+        a#logoutButton {
+            color: #fff;
+            font-size: 18px;
+            text-decoration: none;
+            float: right;
+        }
+
+        /*contents displayed*/
+
+        div.dashBoardInfoMain {
+            padding: 80px 10px 10px;
+        }
+
+        div.dashBoardInfoMain {
+            background: #fff;
+            max-height: 900px;
+            height: 100%;
+            height: 80%;
+        }
+
+        /* Add product form */
+        .add-product-form {
+            margin-top: 20px;
+            background: #f4f4f4;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .add-product-form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .add-product-form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        .add-product-form button {
+            padding: 10px 20px;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .add-product-form button:hover {
+            background-color: #4cae4c;
+        }
+
+        /* Increment/Decrement form */
+        .quantity-adjust-form {
+            margin-top: 20px;
+            background: #f4f4f4;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .quantity-adjust-form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .quantity-adjust-form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        .quantity-adjust-form button {
+            padding: 10px 20px;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .quantity-adjust-form button:hover {
+            background-color: #4cae4c;
+        }
+
+        .search_inventory input[type=text] {
+            float: right;
+            padding: 6px;
+            border: none;
+            margin-top: 8px;
+            margin-right: 16px;
+            font-size: 17px
+        }
+
+        .searchInventory {
+            text-align: center;
+            margin-top: 10px;
+            padding: 10px;
+        }
+
+        .searchInventory input[type="text"] {
+            width: 95%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            /* Light background */
+        }
+
+
+
+
+
+        .employees {
+            margin-top: 20px;
+            margin-left: 20px;
+            margin-right: 20px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            background-color: white;
+
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="dashBoard">
+        <div class="dashBoardSideBar" id="dashBoardSideBar">
+            <h3 class="dashBoardLogo"> Inventi </h3>
+            <div class="dashBoardUser">
+                <img src="/images/Screenshot 2024-10-18 at 8.14.15 AM.png" alt="User image." />
+                <span>Snoop</span>
+            </div>
+            <div class="dashBoardMenu">
+                <ul class="dashBoardMenuList">
+                    <li class="menuInUse">
+                        <a href="/Admin_Dashboard"><i class="fa-solid fa-house"></i> Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="/Admin_Inventory"><i class="fa-solid fa-boxes-packing"></i> Inventory</a>
+                    </li>
+                    <li>
+                        <!--Fix later-->
+                        <a href="/reports"><i class="fa-solid fa-chart-simple"></i> Reports</a>
+                    </li>
+                    <li>
+                        <!--Fix later-->
+                        <a href="/documents"><i class="fa-solid fa-file-circle-plus"></i> Documents</a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+
+        <div class="dashBoardInfo" id="dashBoardInfo">
+            <div class="dashBoardInfoHeader">
+                <a href="" id="toggleButton"><i class="fa-solid fa-bars"></i></a>
+                <a href="index" id="logoutButton"><i class="fa-solid fa-right-from-bracket"></i>Log-Out</a>
+            </div>
+            <!--Search Bar-->
+            <div class="searchInventory">
+                <input type="text" placeholder="Search for your employees">
+            </div>
+            <!-- Current Stock Table -->
+
+            <div class="employees">
+                <h3> Employees</h3>
+                <table>
+                    <tr>
+                        <!--<th>Item ID</th>-->
+                        <th>Employees' Name</th>
+                        <!--<th>SKU</th>-->
+                        <th>Employees' Id Number</th>
+                        <!--<th>Location</th>-->
+                    </tr>
+                    <tr>
+                        <td>backend placeholder </td>
+                        <td>backend placeholder </td>
+
+                    </tr>
+
+                    <tbody>
+                        <!-- Data will be inserted here dynamically -->
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</body>
+<script>
+    // calls mysql table for top sellers of the week or year
+    fetch('/W_top_sellers')
+        .then(response => response.json())
+        .then(data => {
+            const tableBody = document.getElementById('inventoryTable').querySelector('tbody');
+            tableBody.innerHTML = ''; // Clear any previous data
+
+            data.forEach(item => {
+                const row = document.createElement('tr');
+
+                row.innerHTML = `
+                    <td>${item.name}</td>
+                    <td>${item.quantity}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching inventory data:', error);
+        });
+</script>
+<script>
+    var sideBarIsOpen = true;
+
+    toggleButton.addEventListener('click', () => {
+        if (sideBarIsOpen) {
+            event.preventDefault();
+            dashBoardSideBar.style.width = '20%';
+            dashBoardInfo.style.width = '90%';
+            sideBarIsOpen = false;
+        } else {
+            event.preventDefault();
+            dashBoardSideBar.style.width = '30%';
+            dashBoardInfo.style.width = '70%';
+            sideBarIsOpen = true;
+        }
+    });
+</script>
+</body>
+
+</html>
+
+<script>
+    let inactivityTime = function () {
+        let timer;
+
+        // resets timer when user moves mouse/press key
+        window.onload = resetTimer;
+        document.onmousemove = resetTimer;
+        document.onkeypress = resetTimer;
+
+        function logout() {
+            alert("You've been logged out due to inactivity.");
+            window.location.href = "/logout";
+        }
+    }
+</script>
