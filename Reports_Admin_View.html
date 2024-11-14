@@ -184,7 +184,7 @@
             background-color: #4cae4c;
         }
 
-        .search_inventory input[type = text]{
+        .search_inventory input[type=text] {
             float: right;
             padding: 6px;
             border: none;
@@ -198,43 +198,49 @@
             margin-top: 10px;
             padding: 10px;
         }
+
         .searchInventory input[type="text"] {
             width: 95%;
             padding: 10px;
             font-size: 16px;
             border: 1px solid #ccc;
             border-radius: 4px;
-            background-color: #f9f9f9; /* Light background */
+            background-color: #f9f9f9;
+            /* Light background */
         }
-        .Week_top_sellers {
-            margin: 0 auto;
-            width: 95%;
-            padding: 5px;
-            border: 5px solid #ccc; /* Light grey border */
-            border-radius: 5px; /* Rounded corners */
-            background-color: #f9f9f9; /* Light background */
-            margin: 20px auto; /* Spacing around the box */
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow */
+
+        .Week_top_sellers,
+        .year_top_sellers {
+            display: flex;
+            gap: 10px;
         }
-        .year_top_sellers{
-            margin: 0 auto;
-            width: 95%;
-            padding: 5px;
-            border: 5px solid #ccc; /* Light grey border */
-            border-radius: 5px; /* Rounded corners */
-            background-color: #f9f9f9; /* Light background */
-            margin: 20px auto; /* Spacing around the box */
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow */
+
+        .Week_top_sellers,
+        .year_top_sellers {
+            margin-top: 20px;
+            margin-left: 20px;
+            margin-right: 20px;
+            border: 1px solid #ddd;
+            padding: 10 px;
+            background-color: white;
         }
-        .product_container{
-            margin: 0 auto;
-            width: 95%;
-            display:flex;
-            justify-content: space-between;
-            gap: 20px;
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
         }
-       
-        
+
+        th,
+        td {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+
+        .Week_top_sellers h3,
+        .year_top_sellers h3 {
+            padding-left: 20px;
+        }
     </style>
 </head>
 
@@ -254,17 +260,19 @@
                     <li>
                         <a href="/Admin_Inventory"><i class="fa-solid fa-boxes-packing"></i> Inventory</a>
                     </li>
-                    <li>  <!--Fix later-->
+                    <li>
+                        <!--Fix later-->
                         <a href="/reports"><i class="fa-solid fa-chart-simple"></i> Reports</a>
                     </li>
-                    <li> <!--Fix later-->
+                    <li>
+                        <!--Fix later-->
                         <a href="/documents"><i class="fa-solid fa-file-circle-plus"></i> Documents</a>
                     </li>
                 </ul>
-                
+
             </div>
         </div>
-    
+
         <div class="dashBoardInfo" id="dashBoardInfo">
             <div class="dashBoardInfoHeader">
                 <a href="" id="toggleButton"><i class="fa-solid fa-bars"></i></a>
@@ -274,47 +282,57 @@
             <div class="searchInventory">
                 <input type="text" placeholder="Search in your Inventory">
             </div>
-             <!-- Current Stock Table -->
+            <!-- Current Stock Table -->
             <div class="Week_top_sellers">
-                <h3>Weekly Top Sellers</h3>
-                <table id="inventoryTable" border="1">
-                        <thead>
-                            <tr>
-                                <!--<th>Item ID</th>-->
-                                <th>Product Name</th>
-                                <!--<th>SKU</th>-->
-                                <th>Quantity Sold</th>
-                                <!--<th>Location</th>-->
-                            </tr>
-                        </thead>
+                <h3> Weekly Top Sellers</h3>
+                <table>
+                    <tr>
+                        <!--<th>Item ID</th>-->
+                        <th>Product Name</th>
+                        <!--<th>SKU</th>-->
+                        <th>Quantity Sold</th>
+                        <!--<th>Location</th>-->
+                    </tr>
+                    <tr>
+                        <td>backend placeholder </td>
+                        <td>backend placeholder </td>
+
+                    </tr>
+
                     <tbody>
-                            <!-- Data will be inserted here dynamically -->
-                    </tbody>  
+                        <!-- Data will be inserted here dynamically -->
+                    </tbody>
                 </table>
             </div>
             <div class="year_top_sellers">
                 <h3>Yearly Top Sellers</h3>
-                <table id="inventoryTable" border="1">
-                        <thead>
-                            <tr>
-                                <!--<th>Item ID</th>-->
-                                <th>Product Name</th>
-                                <!--<th>SKU</th>-->
-                                <th>Quantity Sold</th>
-                                <!--<th>Location</th>-->
-                            </tr>
-                        </thead>
+                <table>
+
+                    <tr>
+                        <!--<th>Item ID</th>-->
+                        <th>Product Name</th>
+                        <!--<th>SKU</th>-->
+                        <th>Quantity Sold</th>
+                        <!--<th>Location</th>-->
+                    </tr>
+
+                    <tr>
+                        <td>backend placeholder </td>
+                        <td>backend placeholder </td>
+
+                    </tr>
+
                     <tbody>
-                            <!-- Data will be inserted here dynamically -->
-                    </tbody>  
+                        <!-- Data will be inserted here dynamically -->
+                    </tbody>
                 </table>
             </div>
-          
-            
+
+
         </div>
     </div>
 </body>
-    <script> 
+<script>
     // calls mysql table for top sellers of the week or year
     fetch('/W_top_sellers')
         .then(response => response.json())
@@ -336,23 +354,23 @@
             console.error('Error fetching inventory data:', error);
         });
 </script>
-    <script>
-        var sideBarIsOpen = true;
+<script>
+    var sideBarIsOpen = true;
 
-        toggleButton.addEventListener('click', () => {
-            if (sideBarIsOpen) {
-                event.preventDefault();
-                dashBoardSideBar.style.width = '20%';
-                dashBoardInfo.style.width = '90%';
-                sideBarIsOpen = false;
-            } else {
-                event.preventDefault();
-                dashBoardSideBar.style.width = '30%';
-                dashBoardInfo.style.width = '70%';
-                sideBarIsOpen = true;
-            }
-        });
-    </script>
+    toggleButton.addEventListener('click', () => {
+        if (sideBarIsOpen) {
+            event.preventDefault();
+            dashBoardSideBar.style.width = '20%';
+            dashBoardInfo.style.width = '90%';
+            sideBarIsOpen = false;
+        } else {
+            event.preventDefault();
+            dashBoardSideBar.style.width = '30%';
+            dashBoardInfo.style.width = '70%';
+            sideBarIsOpen = true;
+        }
+    });
+</script>
 </body>
 
 </html>
