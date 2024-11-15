@@ -182,8 +182,6 @@
             padding: 5px;
             margin: 5px 0;
         }
-
-
         .adjust_quantity button {
             width: 100%;
             padding: 10px;
@@ -208,17 +206,17 @@
         <div class="dashBoardSideBar" id="dashBoardSideBar">
             <h3 class="dashBoardLogo"> Inventi </h3>
             <div class="dashBoardUser">
-                <img src="/images/Screenshot 2024-10-18 at 8.14.15 AM.png" alt="User image." />
+                <img src="/images/snoopdog.jpg" alt="User image." />
                 <span>Snoop</span>
 
             </div>
             <div class="dashBoardMenu">
                 <ul class="dashBoardMenuList">
                     <li class="menuInUse">
-                        <a href=""><i class="  fa-solid fa-house"></i> Dashboard</a>
+                        <a href="/dashBoard"><i class="  fa-solid fa-house"></i> Dashboard</a>
                     </li>
                     <li>
-                        <a href=""><i class="fa-solid fa-boxes-packing"></i> Incoming Inventory</a>
+                        <a href=""><i class="fa-solid fa-boxes-packing"></i> Inventory</a>
                     </li>
                     <li>
                         <a href=""><i class="fa-solid fa-chart-simple"></i> Reports</a>
@@ -245,13 +243,17 @@
                     <div class="inventory_sections">
                         <div class="current_stock">
                             <h3>Current Stock</h3>
-                            <table>
-                                <tr>
-                                    <th>Item Name</th>
-                                    <th>Quantity</th>
-                                    <th>Location on Site</th>
-                                </tr>
+                            <table id="inventoryTable">
+                                <thead>
+                                    <tr>
+                                        <th>Item Name</th>
+                                        <th>Quantity</th>
+                                        <th>Location on Site</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
+                                </tbody>
                                 <!--for every input there will be a new 
                                             tr> This the new row created
 
@@ -262,24 +264,19 @@
 
                                             </tr>, just an fyi
                                             -->
-
-                                <tr>
-                                    <td>backend placeholder</td>
-                                    <td>backend placeholder</td>
-                                    <td>backend placeholder</td>
-                                </tr>
                             </table>
                         </div>
                         <div class="adjust_quantity">
                             <h3>Adjust Product Quantity</h3>
-                            <label for="productID">Enter Product Item ID or Name:</label>
-                            <input type="text" id="productID">
-                            <label for="quantityAdjustment">Quantity Adjustment (+/-):</label>
-                            <input type="number" id="quantityAdjustment">
-                            <button type="submit" id="adjustButton">Adjust</button>
+                            <form action = "/adjust_quantity" method="POST">
+                                <label for="itemID">Enter Product Item ID/Name:</label>
+                                <input type="text" id="itemID" name="itemID" required><br><br>
+                                <label for="quantity">Quantity Adjustment (+/-):</label>
+                                <input type="number" id="quantity" name="quantity" required><br><br>
+                                <button type="submit">Adjust Quantity</button>
+                            </form>
                         </div>
                     </div>
-
                 </div>
                 <div class="Low_stock">
                     <h3>Low Stock on these items </h3>
@@ -302,28 +299,17 @@
 
                 <div class="top_sellers">
                     <h3>Top Sellers of the Month</h3>
-                    <table>
-                        <tr>
-                            <th>Item Name</th>
-                            <th>Quantity</th>
-                            <th>Sales this Month</th>
+                    <table id="top_sellers_of_month">
+                        <thead>
+                            <tr>
+                                <th>Item Name</th>
+                                <th>Quantity</th>
+                                <th>Sales this Month</th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-
-                        </tr>
-                        <tr>
-                            <td> backend placeholder</td>
-                            <td> backend placeholder</td>
-                            <td> backend placeholder</td>
-
-                        </tr>
-
-                        <tr>
-                            <td> backend placeholder</td>
-                            <td> backend placeholder</td>
-                            <td> backend placeholder</td>
-
-                        </tr>
-
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -332,6 +318,28 @@
     </div>
     </div>
     </div>
+    <script>
+        fetch('/current_stock')
+            .then(response => response.json())
+            .then(data => {
+                const tableBody = document.getElementById('inventoryTable').querySelector('tbody');
+                tableBody.innerHTML = ''; // Clear any previous data
+
+                data.forEach(item => {
+                    const row = document.createElement('tr');
+
+                    row.innerHTML = `
+                        <td>${item.name}</td>
+                        <td>${item.quantity}</td>
+                        <td>${item.location}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching inventory data:', error);
+            });
+    </script>
     <script>
 
         var sideBarIsOpen = true;
@@ -350,6 +358,28 @@
         });
 
 
+    </script>
+    <script>
+        fetch('/top_sellers_of_month')
+            .then(response => response.json())
+            .then(data => {
+                const tableBody = document.getElementById('top_sellers_of_month').querySelector('tbody');
+                tableBody.innerHTML = ''; // Clear any previous data
+
+                data.forEach(item => {
+                    const row = document.createElement('tr');
+
+                    row.innerHTML = `
+                        <td>${item.M_name}</td>
+                        <td>${item.M_quantity}</td>
+                        <td>${item.M_sales}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching top sellers data:', error);
+            });
     </script>
 </body>
 

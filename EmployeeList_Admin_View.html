@@ -253,12 +253,14 @@
                         <a href="/Admin_Inventory"><i class="fa-solid fa-boxes-packing"></i> Inventory</a>
                     </li>
                     <li>
-                        <!--Fix later-->
                         <a href="/reports"><i class="fa-solid fa-chart-simple"></i> Reports</a>
                     </li>
                     <li>
                         <!--Fix later-->
                         <a href="/documents"><i class="fa-solid fa-file-circle-plus"></i> Documents</a>
+                    </li>
+                    <li>
+                        <a href="/Admin_Employee_List"><i class="fa-solid fa-person"></i> Employees</a>
                     </li>
                 </ul>
 
@@ -275,23 +277,15 @@
                 <input type="text" placeholder="Search for your employees">
             </div>
             <!-- Current Stock Table -->
-
-            <div class="employees">
+            <div class="Employees">
                 <h3> Employees</h3>
-                <table>
-                    <tr>
-                        <!--<th>Item ID</th>-->
-                        <th>Employees' Name</th>
-                        <!--<th>SKU</th>-->
-                        <th>Employees' Id Number</th>
-                        <!--<th>Location</th>-->
-                    </tr>
-                    <tr>
-                        <td>backend placeholder </td>
-                        <td>backend placeholder </td>
-
-                    </tr>
-
+                <table id="employee">
+                    <thead>
+                        <tr>
+                            <th>Employees' Name</th>
+                            <th>Employees' Role</th>
+                        </tr>
+                    </thead>
                     <tbody>
                         <!-- Data will be inserted here dynamically -->
                     </tbody>
@@ -302,25 +296,22 @@
     </div>
 </body>
 <script>
-    // calls mysql table for top sellers of the week or year
-    fetch('/W_top_sellers')
+    fetch('/employee_list')
         .then(response => response.json())
         .then(data => {
-            const tableBody = document.getElementById('inventoryTable').querySelector('tbody');
+            const tableBody = document.getElementById('employee').querySelector('tbody');
             tableBody.innerHTML = ''; // Clear any previous data
-
             data.forEach(item => {
                 const row = document.createElement('tr');
-
                 row.innerHTML = `
-                    <td>${item.name}</td>
-                    <td>${item.quantity}</td>
+                    <td>${item.username}</td>
+                    <td>${item.role}</td>
                 `;
                 tableBody.appendChild(row);
             });
         })
         .catch(error => {
-            console.error('Error fetching inventory data:', error);
+            console.error('Error fetching top sellers data:', error);
         });
 </script>
 <script>
