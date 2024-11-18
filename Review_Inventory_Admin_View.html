@@ -142,7 +142,7 @@
             margin-top: 20px;
             border: 1px solid #ddd;
             padding: 10px;
-            background-color: white;
+            background-color: #f9f9f9;
         }
 
         .current_stock {
@@ -184,10 +184,10 @@
             justify-content: center;
             gap: 20px; /* Optional: space between boxes */
         }
-        .add_new_product, .order_product {
+        .add_new_product, .order_product, .adjust_product_quantity {
             flex: 1; /* Ensures equal width for both boxes */
             padding: 10px;
-            background-color: white;
+            background-color: #f9f9f9; 
             border: 1px solid #ddd;
         }
         .dropdown-list{
@@ -241,10 +241,12 @@
                 <a href="index" id="logoutButton"><i class="fa-solid fa-right-from-bracket"></i>Log-Out</a>
             </div>
             <!--Search Bar-->
+            <!-- 
             <div class="searchInventory">
                 <input type="text" id="searchInventory" placeholder="Search in your Inventory">
-                <ul id="searchResultsDropdown" class="dropdown-list"></ul> <!-- List for search results -->
+                <ul id="searchResultsDropdown" class="dropdown-list"></ul>  List for search results 
             </div>
+        -->
             <!-- Current Stock Table -->
 
             <div class="inventory_Section">
@@ -302,8 +304,7 @@
         
                         <button type="submit">Add Product</button>
                     </div>
-                    <div class="product_container_2">
-                        <!--FIX THIS CANT ADJUST-->
+                    <div class="adjust_product_quantity">
                         <h3>Adjust Product Quantity</h3>
                         <form action="/adjust_quantity" method="POST">
                             <label for="itemID">Enter Product Item ID:</label>
