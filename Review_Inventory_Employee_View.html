@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Snoop 131 - Dashboard</title>
+    <!-- Link to the CSS stylesheet -->
+    <link rel="stylesheet" type="text/css" href="login.css">
+    <script src="https://kit.fontawesome.com/2bb5d6196b.js"></script>
+    <style>
+        #dashBoard {
+            display: flex;
+            /*flex-direction: row;*/
+        }
+
+        div.dashBoardSideBar {
+            width: 30%;
+            background: #232323;
+            height: 100vh;
+        }
+
+        div.dashBoardInfo {
+            width: 70%;
+        }
+
+        h3.dashBoardLogo {
+            color: #fff;
+            font-size: 45px;
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        div.dashBoardUser {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+            gap: 10px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #fff;
+        }
+
+        div.dashBoardUser img {
+            width: 70px;
+            display: inline-block;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            margin-left: 10px;
+        }
+
+        div.dashBoardUser span {
+            font-size: 18px;
+            text-transform: uppercase;
+            color: #fff;
+            text-align: center;
+        }
+
+        ul.dashBoardMenuList {
+            list-style-type: none;
+        }
+
+        ul.dashBoardMenuList li {
+            padding: 10px 0px;
+            font-size: 18px;
+            text-transform: uppercase;
+            color: #fff;
+        }
+
+        ul.dashBoardMenuList li a {
+            text-decoration: none;
+            display: block;
+            color: #fff;
+        }
+
+        ul.dashBoardMenuList li.menuInUse {
+            background-color: grey;
+            transition: 0.3ms;
+        }
+
+        ul.dashBoardMenuList li:hover {
+            background-color: grey;
+            transition: 0.3ms all;
+        }
+
+        /*dashboard right side*/
+        div.dashBoardInfoHeader {
+            background: #232323;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: right;
+        }
+
+        div.dashBoardInfoHeader a {
+            color: #fff;
+            font-size: 18px;
+            text-decoration: none;
+        }
+
+        a#logoutButton {
+            color: #fff;
+            font-size: 18px;
+            text-decoration: none;
+            float: right;
+        }
+
+        .search_inventory input[type=text] {
+            float: right;
+            padding: 6px;
+            border: none;
+            margin-top: 8px;
+            margin-right: 16px;
+            font-size: 17px
+        }
+
+        .searchInventory {
+            text-align: center;
+            margin-top: 10px;
+            padding: 10px;
+        }
+
+        .searchInventory input[type="text"] {
+            width: 95%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+
+        }
+
+        /* Right side inventory  */
+
+        .inventory_Section {
+            display: flex;
+            gap: 10px;
+        }
+
+        .current_stock,
+        .product_container,
+        .order_more_product,
+        .product_container_pt2
+         {
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+        .inventory_box{
+        border: 20px solid #fff;
+        }
+        .current_stock {
+            flex: 1;
+        }
+
+        .product_container {
+            display: flex;
+    
+        }
+        .product_container_pt2{
+            display: flex;
+        }
+
+        .order_more_product {
+            width: 450px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .product_container label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        .product_container input {
+            width: 100%;
+            padding: 5px;
+            margin: 5px 0;
+        }
+        .product_flex_container {
+            display: flex;
+            justify-content: center;
+            gap: 20px; /* Optional: space between boxes */
+        }
+        .add_new_product, .order_product, .adjust_product_quantity {
+            flex: 1; /* Ensures equal width for both boxes */
+            padding: 10px;
+            background-color: #f9f9f9; 
+            border: 1px solid #ddd;
+        }
+        .dropdown-list{
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            position: absolute;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="dashBoard">
+        <div class="dashBoardSideBar" id="dashBoardSideBar">
+            <h3 class="dashBoardLogo"> Inventi </h3>
+            <div class="dashBoardUser">
+                <img src="/images/inventory.jpg" alt="User image." />
+                <span>Snoop</span>
+            </div>
+            <div class="dashBoardMenu">
+                <ul class="dashBoardMenuList">
+                    <li class="menuInUse">
+                        <a href="/Admin_Dashboard"><i class="fa-solid fa-house"></i> Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="/Admin_Inventory"><i class="fa-solid fa-boxes-packing"></i> Inventory</a>
+                    </li>
+                    <li>
+                        <a href="/Admin_Reports"><i class="fa-solid fa-chart-simple"></i> Reports</a>
+                    </li>
+                    <li>
+                        <!--Fix later-->
+                        <a href="/documents"><i class="fa-solid fa-file-circle-plus"></i> Documents</a>
+                    </li>
+                    <li>
+                        <a href="/Admin_Employee_List"><i class="fa-solid fa-person"></i> Employees</a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="dashBoardInfo" id="dashBoardInfo">
+        <div class="dashBoardInfoHeader">
+            <a href="" id="toggleButton"><i class="fa-solid fa-bars"></i></a>
+            <a href="index" id="logoutButton"><i class="fa-solid fa-right-from-bracket"></i>Log-Out</a>
+        </div>
+    </div>
+
+
+
+
+</body>
