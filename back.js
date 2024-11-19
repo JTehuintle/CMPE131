@@ -83,6 +83,9 @@ app.get('/Admin_Inventory', isAuthenticated_and_Role('admin'), (req, res)=>{
 app.get('/Admin_Reports', isAuthenticated_and_Role('admin'), (req,res)=>{
     res.sendFile(path.join(__dirname + '/Reports_Admin_View.html'));
 });
+app.get("/Admin_Employee_List", isAuthenticated_and_Role('admin'), (req,res)=>{
+    res.sendFile(path.join(__dirname + '/EmployeeList_Admin_View.html'));
+})
 
 //user logout
 app.get('/logout', (req, res) => {
@@ -208,36 +211,92 @@ app.post('/add_Product', (req, res) => {
 });
 //user wants to adjust quantity 
 app.post('/adjust_quantity', (req, res) => {
-    const { itemID, quantity } = req.body;
+    const { itemID, name, quantity } = req.body;
+    const name_or_id = itemID || name;
     const userRole = req.session.user.role;
 
-    if(userRole === 'admin' || userRole === "employee"){ // checks if userrol is correct
-        const query = 'UPDATE products SET quantity = quantity + ? WHERE itemID = ?';
+    if (userRole === 'admin' || userRole === "employee") { // checks if user role is correct
 
-        connection.query(query, [quantity, itemID], (err, result) => {
+        const query = 'SELECT itemID, name, quantity FROM products WHERE itemID = ? OR name = ?';
+        console.error({name_or_id});
+        connection.query(query, [name_or_id, name_or_id], (err, result) => {
             if (err) {
-                console.error('Error updating quantity:', err);
-                res.send('Error updating quantity');
-            } else {
-                console.log(`Quantity updated successfully for itemID: ${itemID}`); 
-                // redirection based on user role
-                if(userRole === 'admin'){
-                    res.redirect('/Admin_Dashboard');
-                    //COME BACK HERE TO FINISH
-                    //const update_sellers_weekly = "INSERT INTO top_sellers_of_week "
+                console.error('Error fetching product:', err);
+                return res.status(500).send('Error fetching product data');
+            }
+            if (result.length === 0) { // if the results length is 0, then nada was returned
+                console.error('Product not found');
+                return res.status(404).send('Product not found');
+            }
+
+            const currentQuantity = result[0].quantity;
+            const newQuantity = currentQuantity + quantity[0]; // Calculate the new quantity
+
+            // Proceed with updating the quantity if valid
+            //FIX THIS CANT ACTUALLY CHECK IF NEW QUANTITY IS LESS THAN 0
+            if(newQuantity < 0){  // Check if the new quantity will be negative
+                return res.status(400).send('Adjustment exceeds available quantity. Cannot go below zero.');
+                
+            }
+            const updateQuery = 'UPDATE products SET quantity = quantity + ? WHERE itemID = ? OR name = ?';
+            
+            //console.log(updateQuery);
+            connection.query(updateQuery, [quantity, name_or_id, name_or_id], (err, result) => {
+                if (err) {
+                    console.error('Error updating quantity:', err);
+                    return res.status(500).send('Error updating quantity');
                 }
-                else if(userRole === 'employee'){
+            
+                // Handle top sellers update if quantity was decreased
+                if (quantity < 0) { // Update both M_quantity and M_sales for top sellers
+                    const updateTopSellersQuery = `
+                        INSERT INTO top_sellers_of_month (M_name, M_quantity, M_sales)
+                        SELECT name, quantity, ABS(?) FROM products WHERE itemID = ? OR name = ?
+                        ON DUPLICATE KEY UPDATE M_quantity = M_quantity + ?, M_sales = M_sales + ABS(?);
+                    `;
+            
+                    connection.query(updateTopSellersQuery, [quantity, itemID, name_or_id, quantity, quantity], (err, result) => {
+                        if (err) {
+                            console.error('Error updating top sellers:', err);
+                            return res.status(500).send("Error updating top sellers");
+                        } else {
+                            console.log(`Top seller data updated for itemID or name: ${itemID} / ${name_or_id}`);
+                        }
+                    });
+                    console.log(`Quantity updated quantity and sales successfully for ${name_or_id}`);
+                } else if (quantity > 0) { // Update only M_quantity for top sellers
+                    const updateTopSellersQuery = `
+                        INSERT INTO top_sellers_of_month (M_name, M_quantity)
+                        SELECT name, quantity FROM products WHERE itemID = ? OR name = ?
+                        ON DUPLICATE KEY UPDATE M_quantity = M_quantity + ?;
+                    `;
+                    
+                    connection.query(updateTopSellersQuery, [itemID, name_or_id, quantity], (err, result) => {
+                        if (err) {
+                            console.error('Error updating top sellers:', err);
+                            return res.status(500).send("Error updating top sellers");
+                        } else {
+                            console.log(`Top seller data updated for itemID or name: ${itemID} / ${name_or_id}`);
+                        }
+                    });
+                    console.log(`Quantity updated quantity successfully for ${name_or_id}`);
+                }
+                // redirects based on user role
+                if (userRole === 'admin') {
+                    res.redirect('/Admin_Dashboard');
+                } else if (userRole === 'employee') {
                     res.redirect('/dashBoard');
                 }
-            }
+            });
         });
     } else {
-        res.send("User Role not found.");
+        res.status(403).send("User role not authorized.");
     }
 });
+
 // fetch mysql stock data
 // may not need isauthenticated role
-app.get('/current_stock', isAuthenticated_and_Role('admin'), (req,res)=>{
+app.get('/current_stock', (req,res)=>{
     const query = 'SELECT * FROM products';
     
     connection.query(query, (err, results)=>{
@@ -249,8 +308,8 @@ app.get('/current_stock', isAuthenticated_and_Role('admin'), (req,res)=>{
         }
     });
 });
-//displays top sellers
-app.get('/W_top_sellers', isAuthenticated_and_Role('admin'),(req,res)=>{
+//displays top sellers for week
+app.get('/W_top_sellers',(req,res)=>{
     const query = 'SELECT * FROM top_sellers_of_week';
 
     connection.query(query,(err, results)=>{
@@ -262,11 +321,58 @@ app.get('/W_top_sellers', isAuthenticated_and_Role('admin'),(req,res)=>{
         }
     });
 });
+// displays top sellers for month
+app.get('/top_sellers_of_month', (req, res) => {
+    const query = 'SELECT * FROM top_sellers_of_month';
+    connection.query(query, (err, results) => {
+        if (err) {
+            console.error('Error fetching top sellers:', err);
+            res.status(500).send('Error fetching data');
+        } else {
+            res.json(results); // Send data as JSON
+        }
+    });
+});
+// searchitem cant get to work
+app.get('/search_inventory', (req, res) => {
+    const searchTerm = req.query.q; // 'q' will be the search term sent from the frontend
+
+    if (!searchTerm) {
+        return res.status(400).send('Search term is required');
+    }
+
+    // Perform SQL query to search by name or location
+    const query = `
+        SELECT name, quantity, location 
+        FROM products 
+        WHERE name LIKE ? OR location LIKE ?
+    `;
+    const likeSearchTerm = `%${searchTerm}%`;
+
+    connection.query(query, [likeSearchTerm, likeSearchTerm], (err, results) => {
+        if (err) {
+            console.error('Error searching inventory:', err);
+            res.status(500).send('Error searching inventory');
+        } else {
+            res.json(results); // Return matching results as JSON
+        }
+    });
+});
+// Fetch Employee list
+app.get('/employee_list', (req, res)=>{
+    const query = 'SELECT * FROM users';
+    connection.query(query, (err, results)=>{
+        if(err){
+            console.error('Error fetching employee data: ', err);
+            res.status(500).send('Error fetching employee Data.');
+        }
+        else{
+            res.json(results);
+        }
+    });
+});
 
 //ALERTS
-
-
-
 
 //posts in console that website is located at cite. 
 app.listen(port,()=>{
@@ -279,9 +385,6 @@ https://www.databasestar.com/column-count-doesnt-match-value-count/
 https://stackoverflow.com/questions/55308778/typeerror-undefined-is-not-iterable-cannot-read-property-symbolsymbol-iterato
 https://dev.mysql.com/downloads/
 https://www.geeksforgeeks.org/node-js-connect-mysql-with-node-app/
-
-
-
 
 
 */
