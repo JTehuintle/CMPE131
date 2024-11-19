@@ -27,7 +27,8 @@
             display: block;
             margin-bottom: 5px;
         }
-        .register-container input {
+        .register-container input,
+        .register-container select {
             width: 100%;
             padding: 10px;
             margin-bottom: 15px;
@@ -54,10 +55,17 @@
         <form action="/register" method="POST">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
+            
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
+            
+            <label for="role">Role:</label>
+            <select id="role" name="role" required>
+                <option value="employee">Employee</option>
+                <option value="admin">Admin</option>
+            </select>
+            
             <button type="submit">Register</button> 
-            <!--// work on this later, must return back to login page.-->
         </form>
     </div>
 </body>
