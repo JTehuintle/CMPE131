@@ -138,22 +138,26 @@
         .current_stock,
         .product_container,
         .order_more_product,
-        .product_container_2 {
+        .product_container_pt2
+         {
             margin-top: 20px;
-            margin-left: 10px;
-            margin-right: 10px;
             border: 1px solid #ddd;
             padding: 10px;
             background-color: #f9f9f9;
         }
-
+        .inventory_box{
+        border: 20px solid #fff;
+        }
         .current_stock {
             flex: 1;
         }
 
         .product_container {
             display: flex;
-
+    
+        }
+        .product_container_pt2{
+            display: flex;
         }
 
         .order_more_product {
@@ -181,25 +185,18 @@
             padding: 5px;
             margin: 5px 0;
         }
-
         .product_flex_container {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            /* Optional: space between boxes */
+            gap: 20px; /* Optional: space between boxes */
         }
-
-        .add_new_product,
-        .order_product,
-        .adjust_product_quantity {
-            flex: 1;
-            /* Ensures equal width for both boxes */
+        .add_new_product, .order_product, .adjust_product_quantity {
+            flex: 1; /* Ensures equal width for both boxes */
             padding: 10px;
-            background-color: #f9f9f9;
+            background-color: #f9f9f9; 
             border: 1px solid #ddd;
         }
-
-        .dropdown-list {
+        .dropdown-list{
             list-style-type: none;
             padding: 0;
             margin: 0;
@@ -210,7 +207,6 @@
             position: absolute;
             width: 100%;
         }
-
         .product_container button {
             width: 100%;
             padding: 10px;
@@ -225,11 +221,6 @@
         .product_container button :hover {
             background-color: grey;
             transition: 0.3ms all;
-        }
-
-        .product_container text {
-            resize: horizontal;
-
         }
     </style>
 </head>
@@ -255,7 +246,7 @@
                     </li>
                     <li>
                         <!--Fix later-->
-                        <a href="/Admin_Document"><i class="fa-solid fa-file-circle-plus"></i> Documents</a>
+                        <a href="/documents"><i class="fa-solid fa-file-circle-plus"></i> Documents</a>
                     </li>
                     <li>
                         <a href="/Admin_Employee_List"><i class="fa-solid fa-person"></i> Employees</a>
@@ -265,36 +256,36 @@
             </div>
         </div>
 
-        <div class="dashBoardInfo" id="dashBoardInfo">
-            <div class="dashBoardInfoHeader">
-                <a href="" id="toggleButton"><i class="fa-solid fa-bars"></i></a>
-                <a href="index" id="logoutButton"><i class="fa-solid fa-right-from-bracket"></i>Log-Out</a>
-            </div>
-            <!--Search Bar-->
-            <!-- 
-            <div class="searchInventory">
-                <input type="text" id="searchInventory" placeholder="Search in your Inventory">
-                <ul id="searchResultsDropdown" class="dropdown-list"></ul>  List for search results 
-            </div>
-        -->
-            <!-- Current Stock Table -->
-
+    <div class="dashBoardInfo" id="dashBoardInfo">
+        <div class="dashBoardInfoHeader">
+            <a href="" id="toggleButton"><i class="fa-solid fa-bars"></i></a>
+            <a href="index" id="logoutButton"><i class="fa-solid fa-right-from-bracket"></i>Log-Out</a>
+        </div>
+        <!--Search Bar-->
+        <!-- 
+        <div class="searchInventory">
+            <input type="text" id="searchInventory" placeholder="Search in your Inventory">
+            <ul id="searchResultsDropdown" class="dropdown-list"></ul>  List for search results 
+        </div>
+    -->
+        <!-- Current Stock Table -->
+        <div class = "inventory_box">
             <div class="inventory_Section">
                 <div class="current_stock">
                     <h3>Current Stock</h3>
                     <table id="inventoryTable">
-                        <thead>
-                            <tr>
-                                <th>Item ID</th>
-                                <th>Product Name</th>
-                                <th>SKU</th>
-                                <th>Quantity</th>
-                                <th>Location</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                    <thead>
+                        <tr>
+                        <th>Item ID</th>
+                            <th>Product Name</th>
+                            <th>SKU</th>
+                            <th>Quantity</th>
+                            <th>Location</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-                        </tbody>
+                    </tbody>
                     </table>
                 </div>
             </div>
@@ -319,20 +310,22 @@
 
                         <button type="submit">Add Product</button>
                     </form>
-
                 </div>
                 <div class="order_product">
                     <h3>Order Product</h3>
-                    <label for="itemID">Item ID:</label>
-                    <input type="text" id="itemID" name="itemID" required><br><br>
-
-                    <label for="name">Product Name:</label>
-                    <input type="text" id="name" name="name" required><br><br>
-
-                    <label for="quantity">Quantity:</label>
-                    <input type="number" id="quantity" name="quantity" required><br><br>
-
-                    <button type="submit">Add Product</button>
+                    <form action = "/order_product" method="POST">
+                        <label for="itemID">Item ID:</label>
+                        <input type="text" id="itemID" name="itemID" required><br><br>
+    
+                        <label for="name">Product Name:</label>
+                        <input type="text" id="name" name="name" required><br><br>
+    
+                        <label for="quantity">Quantity:</label>
+                        <input type="number" id="quantity" name="quantity" required><br><br>
+    
+                        <button type="submit">Add Product</button>
+                    </form>
+                    
                 </div>
                 <div class="adjust_product_quantity">
                     <h3>Adjust Product Quantity</h3>
@@ -345,14 +338,22 @@
 
                         <button type="submit">Adjust Quantity</button>
                     </form>
-
                 </div>
             </div>
 
+            <div class = "product_container_pt2">
+                <div class = "remove_item">
+                    <h3> Remove Item from Stock </h3>
+                    <form action = "/remove_item" method = "POST">
+                        <label for = "itemID"> Item ID: </label>
+                        <input type = "text" id = "itemID" name = "itemID" required><br><br>
 
-
-
-        </div>
+                        <button type = "submit"> Remove Item </button>
+                    </form>
+                </div>
+            </div>
+            </div>
+    </div>
     </div>
 </body>
 <script>
@@ -380,40 +381,20 @@
         });
 </script>
 <script>
+    var sideBarIsOpen = true;
 
-    document.addEventListener('DOMContentLoaded', () => {
-        const dashBoardSideBar = document.getElementById('dashBoardSideBar');
-        const dashBoardInfo = document.getElementById('dashBoardInfo');
-        const toggleButton = document.getElementById('toggleButton');
-
-        // Load sidebar state from localStorage
-        let sideBarIsOpen = localStorage.getItem('sideBarState') !== 'closed';
-
-        // Apply the initial state
-        if (!sideBarIsOpen) {
+    toggleButton.addEventListener('click', () => {
+        if (sideBarIsOpen) {
+            event.preventDefault();
             dashBoardSideBar.style.width = '20%';
             dashBoardInfo.style.width = '90%';
+            sideBarIsOpen = false;
         } else {
+            event.preventDefault();
             dashBoardSideBar.style.width = '30%';
             dashBoardInfo.style.width = '70%';
+            sideBarIsOpen = true;
         }
-
-        // Toggle sidebar state on button click
-        toggleButton.addEventListener('click', (event) => {
-            event.preventDefault(); // Prevent default behavior of the anchor tag
-            if (sideBarIsOpen) {
-                dashBoardSideBar.style.width = '20%';
-                dashBoardInfo.style.width = '90%';
-                sideBarIsOpen = false;
-                localStorage.setItem('sideBarState', 'closed');
-            } else {
-                dashBoardSideBar.style.width = '30%';
-                dashBoardInfo.style.width = '70%';
-                sideBarIsOpen = true;
-                localStorage.setItem('sideBarState', 'open');
-            }
-        });
-
     });
 </script>
 </body>
