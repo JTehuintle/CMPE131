@@ -4,6 +4,7 @@
 <head>
     <title>Snoop 131 - Dashboard</title>
     <!-- Link to the CSS stylesheet -->
+    <link rel="stylesheet" type="text/css" href="login.css">
     <script src="https://kit.fontawesome.com/2bb5d6196b.js"></script>
     <style>
         #dashBoard {
@@ -208,14 +209,21 @@
             /* Light background */
         }
 
-        .Employees {
+        .Products_Ordered {
+            display: flex;
+            gap: 10px;
+
+
+        }
+
+        .Products_Ordered {
             margin-top: 20px;
             margin-left: 20px;
             margin-right: 20px;
             border: 1px solid #ddd;
-            padding: 10px;
+            padding: 10 px;
+            padding-left: 10px;
             background-color: #f9f9f9;
-
         }
 
         table {
@@ -249,6 +257,7 @@
                         <a href="/Admin_Inventory"><i class="fa-solid fa-boxes-packing"></i> Inventory</a>
                     </li>
                     <li>
+                        <!--Fix later-->
                         <a href="/Admin_Reports"><i class="fa-solid fa-chart-simple"></i> Reports</a>
                     </li>
                     <li>
@@ -270,44 +279,57 @@
             </div>
             <!--Search Bar-->
             <div class="searchInventory">
-                <input type="text" placeholder="Search for your employees">
+                <input type="text" placeholder="Search in your Inventory">
             </div>
             <!-- Current Stock Table -->
-            <div class="Employees">
-                <h3> Employees</h3>
-                <table id="employee">
-                    <thead>
-                        <tr>
-                            <th>Employees' Name</th>
-                            <th>Employees' Role</th>
-                        </tr>
-                    </thead>
+            <div class="Products_Ordered">
+                <h3> Report of Products Ordered</h3>
+                <table>
+                    <tr>
+                        <th>Item ID</th>
+                        <th>Product Name</th>
+                        <!--<th>SKU</th>-->
+                        <th>Quantity Bought</th>
+                        <!--<th>Location</th>-->
+                        <!--<th>Manufracture</th>-->
+                    </tr>
+                    <tr>
+                        <td>backend placeholder </td>
+                        <td>backend placeholder </td>
+                        <td>backend placeholder </td>
+
+                    </tr>
+
                     <tbody>
                         <!-- Data will be inserted here dynamically -->
                     </tbody>
                 </table>
             </div>
-
         </div>
     </div>
 </body>
 <script>
-    fetch('/employee_list')
+    // calls mysql table for products ordered
+
+    fetch('/Products_Ordered')
         .then(response => response.json())
         .then(data => {
-            const tableBody = document.getElementById('employee').querySelector('tbody');
+            const tableBody = document.getElementById('inventoryTable').querySelector('tbody');
             tableBody.innerHTML = ''; // Clear any previous data
+
             data.forEach(item => {
                 const row = document.createElement('tr');
+
                 row.innerHTML = `
-                    <td>${item.username}</td>
-                    <td>${item.role}</td>
+                    <td>${item.itemid}</td>
+                    <td>${item.name}</td>
+                    <td>${item.quantity}</td>
                 `;
                 tableBody.appendChild(row);
             });
         })
         .catch(error => {
-            console.error('Error fetching top sellers data:', error);
+            console.error('Error fetching inventory data:', error);
         });
 </script>
 <script>

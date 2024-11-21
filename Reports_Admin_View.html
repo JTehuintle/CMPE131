@@ -213,7 +213,7 @@
         .year_top_sellers {
             display: flex;
             gap: 10px;
-            
+
         }
 
         .Week_top_sellers,
@@ -263,11 +263,11 @@
                     </li>
                     <li>
                         <!--Fix later-->
-                        <a href="/reports"><i class="fa-solid fa-chart-simple"></i> Reports</a>
+                        <a href="/Admin_Reports"><i class="fa-solid fa-chart-simple"></i> Reports</a>
                     </li>
                     <li>
                         <!--Fix later-->
-                        <a href="/documents"><i class="fa-solid fa-file-circle-plus"></i> Documents</a>
+                        <a href="/Admin_Document"><i class="fa-solid fa-file-circle-plus"></i> Documents</a>
                     </li>
                     <li>
                         <a href="/Admin_Employee_List"><i class="fa-solid fa-person"></i> Employees</a>
@@ -359,21 +359,41 @@
         });
 </script>
 <script>
-    var sideBarIsOpen = true;
 
-    toggleButton.addEventListener('click', () => {
-        if (sideBarIsOpen) {
-            event.preventDefault();
+    document.addEventListener('DOMContentLoaded', () => {
+        const dashBoardSideBar = document.getElementById('dashBoardSideBar');
+        const dashBoardInfo = document.getElementById('dashBoardInfo');
+        const toggleButton = document.getElementById('toggleButton');
+
+        // Load sidebar state from localStorage
+        let sideBarIsOpen = localStorage.getItem('sideBarState') !== 'closed';
+
+        // Apply the initial state
+        if (!sideBarIsOpen) {
             dashBoardSideBar.style.width = '20%';
             dashBoardInfo.style.width = '90%';
-            sideBarIsOpen = false;
         } else {
-            event.preventDefault();
             dashBoardSideBar.style.width = '30%';
             dashBoardInfo.style.width = '70%';
-            sideBarIsOpen = true;
         }
+
+        // Toggle sidebar state on button click
+        toggleButton.addEventListener('click', (event) => {
+            event.preventDefault(); // Prevent default behavior of the anchor tag
+            if (sideBarIsOpen) {
+                dashBoardSideBar.style.width = '20%';
+                dashBoardInfo.style.width = '90%';
+                sideBarIsOpen = false;
+                localStorage.setItem('sideBarState', 'closed');
+            } else {
+                dashBoardSideBar.style.width = '30%';
+                dashBoardInfo.style.width = '70%';
+                sideBarIsOpen = true;
+                localStorage.setItem('sideBarState', 'open');
+            }
+        });
     });
+
 </script>
 </body>
 
