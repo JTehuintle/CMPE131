@@ -227,7 +227,7 @@ app.post('/adjust_quantity', (req, res) => {
     if (userRole === 'admin' || userRole === "employee") { // checks if user role is correct
 
         const query = 'SELECT itemID, name, quantity FROM products WHERE itemID = ? OR name = ?';
-        console.error({name_or_id});
+        //console.error({name_or_id});
         connection.query(query, [name_or_id, name_or_id], (err, result) => {
             if (err) {
                 console.error('Error fetching product:', err);
@@ -238,9 +238,10 @@ app.post('/adjust_quantity', (req, res) => {
                 return res.status(404).send('Product not found');
             }
 
-            const currentQuantity = result[0].quantity;
-            const newQuantity = currentQuantity + quantity[0]; // Calculate the new quantity
-
+            const currentQuantity = Number(result[0].quantity);
+            const quantity = Number(req.body.quantity);
+            const newQuantity = currentQuantity + quantity; // Calculate the new quantity
+            //console.error("NEW QUANTITY", newQuantity);
             // Proceed with updating the quantity if valid
             //FIX THIS CANT ACTUALLY CHECK IF NEW QUANTITY IS LESS THAN 0
             if(newQuantity < 0){  // Check if the new quantity will be negative
