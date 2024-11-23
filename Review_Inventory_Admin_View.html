@@ -222,6 +222,12 @@
             background-color: grey;
             transition: 0.3ms all;
         }
+        th,
+        td {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -246,7 +252,7 @@
                     </li>
                     <li>
                         <!--Fix later-->
-                        <a href="/documents"><i class="fa-solid fa-file-circle-plus"></i> Documents</a>
+                        <a href="/Admin_Document"><i class="fa-solid fa-file-circle-plus"></i> Documents</a>
                     </li>
                     <li>
                         <a href="/Admin_Employee_List"><i class="fa-solid fa-person"></i> Employees</a>
@@ -276,7 +282,7 @@
                     <table id="inventoryTable">
                     <thead>
                         <tr>
-                        <th>Item ID</th>
+                            <th>Item ID</th>
                             <th>Product Name</th>
                             <th>SKU</th>
                             <th>Quantity</th>

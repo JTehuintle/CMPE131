@@ -284,7 +284,8 @@
             <!-- Current Stock Table -->
             <div class="Products_Ordered">
                 <h3> Report of Products Ordered</h3>
-                <table>
+                <table id = "Product_Report">
+                <thead>
                     <tr>
                         <th>Item ID</th>
                         <th>Product Name</th>
@@ -293,16 +294,10 @@
                         <!--<th>Location</th>-->
                         <!--<th>Manufracture</th>-->
                     </tr>
-                    <tr>
-                        <td>backend placeholder </td>
-                        <td>backend placeholder </td>
-                        <td>backend placeholder </td>
-
-                    </tr>
-
-                    <tbody>
-                        <!-- Data will be inserted here dynamically -->
-                    </tbody>
+                </thead>
+                <tbody>
+                    <!-- Data will be inserted here dynamically -->
+                </tbody>
                 </table>
             </div>
         </div>
@@ -310,18 +305,17 @@
 </body>
 <script>
     // calls mysql table for products ordered
-
     fetch('/Products_Ordered')
         .then(response => response.json())
         .then(data => {
-            const tableBody = document.getElementById('inventoryTable').querySelector('tbody');
+            const tableBody = document.getElementById('Product_Report').querySelector('tbody');
             tableBody.innerHTML = ''; // Clear any previous data
 
             data.forEach(item => {
                 const row = document.createElement('tr');
 
                 row.innerHTML = `
-                    <td>${item.itemid}</td>
+                    <td>${item.itemID}</td>
                     <td>${item.name}</td>
                     <td>${item.quantity}</td>
                 `;
@@ -372,6 +366,7 @@
 </body>
 
 </html>
+
 
 <script>
     let inactivityTime = function () {

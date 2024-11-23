@@ -436,6 +436,18 @@ app.get('/display_ordered_product', (req, res) => {
         }
     });
 });
+//display products ordered
+app.get('/Products_Ordered', (req, res) => {
+    const query = 'SELECT * FROM order_Product';
+    connection.query(query, (err, results) => {
+        if (err) {
+            console.error('Error fetching top sellers:', err);
+            res.status(500).send('Error fetching data');
+        } else {
+            res.json(results); // Send data as JSON
+        }
+    });
+});
 
 //ALERTS
 
