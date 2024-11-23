@@ -243,7 +243,6 @@ app.post('/adjust_quantity', (req, res) => {
             const newQuantity = currentQuantity + quantity; // Calculate the new quantity
             //console.error("NEW QUANTITY", newQuantity);
             // Proceed with updating the quantity if valid
-            //FIX THIS CANT ACTUALLY CHECK IF NEW QUANTITY IS LESS THAN 0
             if(newQuantity < 0){  // Check if the new quantity will be negative
                 return res.status(400).send('Adjustment exceeds available quantity. Cannot go below zero.');
                 
@@ -257,8 +256,8 @@ app.post('/adjust_quantity', (req, res) => {
                     return res.status(500).send('Error updating quantity');
                 }
             
-                // Handle top sellers update if quantity was decreased
-                if (quantity < 0) { // Update both M_quantity and M_sales for top sellers
+                // handle top sellers update if quantity was decreased
+                if (quantity < 0) { // update both M_quantity and M_sales for top sellers
                     const updateTopSellersQuery = `
                         INSERT INTO top_sellers_of_month (M_name, M_quantity, M_sales)
                         SELECT name, quantity, ABS(?) FROM products WHERE itemID = ? OR name = ?
@@ -274,7 +273,7 @@ app.post('/adjust_quantity', (req, res) => {
                         }
                     });
                     console.log(`Quantity updated quantity and sales successfully for ${name_or_id}`);
-                } else if (quantity > 0) { // Update only M_quantity for top sellers
+                } else if (quantity > 0) { // update only M_quantity for top sellers
                     const updateTopSellersQuery = `
                         INSERT INTO top_sellers_of_month (M_name, M_quantity)
                         SELECT name, quantity FROM products WHERE itemID = ? OR name = ?
