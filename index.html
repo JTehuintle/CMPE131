@@ -117,6 +117,17 @@
             padding: 10px 20px;
 
         }
+
+        .create-account a,
+        .forgot-password a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .create-account a:hover,
+        .forgot-password a:hover {
+            color: blue;
+        }
     </style>
 
     <!-- Link to the CSS stylesheet -->
@@ -168,7 +179,11 @@
         </form>
 
         <div class="create-account">
-            <p>Dont have an account? <a href="/register"> Create one here!</a></p>
+            <p>Don't have an account? <a href="/register"> Create one here!</a></p>
+        </div>
+        <div class="forgot-password">
+            <p>Forgot password? <a href="/password"> reset!</a></p>
+
         </div>
     </div>
     <script>
