@@ -313,3 +313,39 @@
             console.error('Error fetching inventory data:', error);
         });
 </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const dashBoardSideBar = document.getElementById('dashBoardSideBar');
+        const dashBoardInfo = document.getElementById('dashBoardInfo');
+        const toggleButton = document.getElementById('toggleButton');
+
+        // Load sidebar state from localStorage
+        let sideBarIsOpen = localStorage.getItem('sideBarState') !== 'closed';
+
+        // Apply the initial state
+        if (!sideBarIsOpen) {
+            dashBoardSideBar.style.width = '20%';
+            dashBoardInfo.style.width = '90%';
+        } else {
+            dashBoardSideBar.style.width = '30%';
+            dashBoardInfo.style.width = '70%';
+        }
+
+        // Toggle sidebar state on button click
+        toggleButton.addEventListener('click', (event) => {
+            event.preventDefault(); // Prevent default behavior of the anchor tag
+            if (sideBarIsOpen) {
+                dashBoardSideBar.style.width = '20%';
+                dashBoardInfo.style.width = '90%';
+                sideBarIsOpen = false;
+                localStorage.setItem('sideBarState', 'closed');
+            } else {
+                dashBoardSideBar.style.width = '30%';
+                dashBoardInfo.style.width = '70%';
+                sideBarIsOpen = true;
+                localStorage.setItem('sideBarState', 'open');
+            }
+        });
+    });
+</script>
